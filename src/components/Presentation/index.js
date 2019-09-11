@@ -5,6 +5,7 @@ import NetherLands from "../../images/netherlands.jpg";
 import Hawaii from "../../images/hawaii.jpg";
 import { PresentImage, Title } from "./styles";
 
+
 export const Presentation = () => (
   <Carousel indicators="false" fade="true">
     <Carousel.Item>

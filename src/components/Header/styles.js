@@ -1,14 +1,15 @@
 import styled from "styled-components";
-import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
+import { Link as MenuLink } from 'react-router-dom'
 //Yes this is an experiment
 
 export const HeaderContainer = styled(Navbar)`
  
   background: black !important;
   width: 100%;
+  text-decoration: none;
 `;
 
 export const Logo = styled.div`
@@ -27,12 +28,22 @@ export const HeaderSingUp = styled(Button)`
   }
 `;
 export const MenuItems = styled(Nav.Link)`
-  color: gray !important;
   margin: 0px 5vw 0px 5vw;
   cursor: pointer;
   position: relative;
-
+  text-decoration: none;
+  color: gray !important;
   &:hover {
     color: #959494 !important;
+    text-decoration: none;
+  }
+`;
+
+export const Link = styled(MenuLink)`
+  color: gray !important;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
   }
 `;

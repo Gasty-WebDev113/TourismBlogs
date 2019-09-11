@@ -3,12 +3,12 @@ import { FaPlane } from "react-icons/fa";
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 
-
 import {
   Logo,
   HeaderSingUp,
   MenuItems,
-  HeaderContainer
+  HeaderContainer,
+  Link
 } from "./styles";
 
 export const Header = () => (
@@ -17,9 +17,9 @@ export const Header = () => (
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
     <Nav className="mr-auto">
-      <MenuItems href="#">Home</MenuItems>
-      <MenuItems href="#">Blogs</MenuItems>
-      <MenuItems href="#">Make a Blog</MenuItems>
+      <MenuItems><Link to="/">Home</Link></MenuItems>
+      <MenuItems><Link to="/blogs">Blogs</Link></MenuItems>
+      <MenuItems><Link to="/create">Create a Blog</Link></MenuItems>
     </Nav>
     
   </Navbar.Collapse>

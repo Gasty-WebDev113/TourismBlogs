@@ -33,9 +33,11 @@ export const Hashtag = styled(Badge)`
   top: 50%;
   transform: translateY(-50%);
   margin-right: 3%;
+  cursor: pointer;
   @media (max-width: 768px){
     font-size: 0.5rem;
   }
+
 `
 
 export const Like = styled(IoIosHeartEmpty)`
@@ -57,7 +59,7 @@ export const Container = styled.div`
 
 export const Title = styled.h1`
   color: black;
-  margin-bottom: 5%;
+  margin-bottom: 3%;
   position: relative;
   top: 40px;
 
