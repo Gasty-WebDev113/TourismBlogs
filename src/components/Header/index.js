@@ -1,47 +1,28 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
 import { FaPlane } from "react-icons/fa";
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+
 
 import {
   Logo,
-  HeaderRow,
   HeaderSingUp,
   MenuItems,
   HeaderContainer
 } from "./styles";
 
 export const Header = () => (
-  <HeaderContainer fluid="true">
-    <HeaderRow>
-      <Col xl="2">
-        <Logo>
-          <FaPlane
-            color="white"
-            size="3rem"
-            style={{
-              top: "50%",
-              transform: "translate(0%, -50%)",
-              position: "relative"
-            }}
-          />
-        </Logo>
-      </Col>
-
-      <Col>
-        <MenuItems>Home</MenuItems>
-      </Col>
-      <Col>
-        <MenuItems>Blogs</MenuItems>
-      </Col>
-      <Col>
-        <MenuItems>Make a Blog</MenuItems>
-      </Col>
-      <Col xl="2">
-        <HeaderSingUp variant="success" md={{ span: 3, offset: 3 }}>
-          Sing Up
-        </HeaderSingUp>
-      </Col>
-    </HeaderRow>
-  </HeaderContainer>
+  <HeaderContainer collapseOnSelect expand="lg" >
+  <Navbar.Brand href="#home"><Logo><FaPlane size='3rem' color="white"/></Logo></Navbar.Brand>
+  <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+  <Navbar.Collapse id="responsive-navbar-nav">
+    <Nav className="mr-auto">
+      <MenuItems href="#">Home</MenuItems>
+      <MenuItems href="#">Blogs</MenuItems>
+      <MenuItems href="#">Make a Blog</MenuItems>
+    </Nav>
+    
+  </Navbar.Collapse>
+  <HeaderSingUp variant="success">Sing Up</HeaderSingUp>
+</HeaderContainer>
 );

@@ -1,128 +1,67 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import CardGroup from "react-bootstrap/CardGroup";
-import Nether from "../../images/netherlands2.jpg";
-import { BlogCard, ImgCard, Container, Title, Like } from "./styles";
 
-import { relative } from "path";
+import Japan from "../../images/japan.jpg";
+import { BlogCard, ImgCard, Container, Title, Like, BookMarks, Hashtag } from "./styles";
 
-export const FeaturedBlogs = () => (
+export const FeaturedBlogs = ({title, description, categories}) => (
   <Container>
     <Title>Featured Blogs</Title>
     <CardGroup>
-      <BlogCard>
-        <ImgCard variant="top" src={Nether} />
+      <BlogCard md="auto">
+        <ImgCard variant="top" src={Japan} />
         <Card.Body>
-          <Card.Title>Card title</Card.Title>
+          <Card.Title>{title}</Card.Title>
           <Card.Text>
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content. This content is a little bit longer.
+            {description}
           </Card.Text>
         </Card.Body>
         <Card.Footer>
+          {
+            categories.map((categorie) =>{
+              return <Hashtag>#{categorie}</Hashtag>
+            })
+          }
+          <BookMarks/>
+          <Like />
+        </Card.Footer>
+      </BlogCard>
+      
+      <BlogCard md="auto">
+        <ImgCard variant="top" src={Japan} />
+        <Card.Body>
+          <Card.Title>{title}</Card.Title>
+          <Card.Text>
+            {description}
+          </Card.Text>
+        </Card.Body>
+        <Card.Footer>
+          {
+            categories.map((categorie) =>{
+              return <Hashtag>#{categorie}</Hashtag>
+            })
+          }
+          <BookMarks/>
           <Like />
         </Card.Footer>
       </BlogCard>
 
-      <BlogCard>
-        <ImgCard variant="top" src={Nether} />
+      <BlogCard md="auto">
+        <ImgCard variant="top" src={Japan} />
         <Card.Body>
-          <Card.Title>Card title</Card.Title>
+          <Card.Title>{title}</Card.Title>
           <Card.Text>
-            This card has supporting text below as a natural lead-in to
-            additional content.{" "}
+            {description}
           </Card.Text>
         </Card.Body>
         <Card.Footer>
-          <Like />
-        </Card.Footer>
-      </BlogCard>
-
-      <BlogCard>
-        <ImgCard variant="top" src={Nether} />
-        <Card.Body>
-          <Card.Title>Card title</Card.Title>
-          <Card.Text>
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content. This card has even longer content than the
-            first to show that equal height action.
-          </Card.Text>
-        </Card.Body>
-        <Card.Footer>
-          <Like />
-        </Card.Footer>
-      </BlogCard>
-
-      <BlogCard>
-        <ImgCard variant="top" src={Nether} />
-        <Card.Body>
-          <Card.Title>Card title</Card.Title>
-          <Card.Text>
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content. This card has even longer content than the
-            first to show that equal height action.
-          </Card.Text>
-        </Card.Body>
-        <Card.Footer>
-          <Like />
-        </Card.Footer>
-      </BlogCard>
-    </CardGroup>
-    <CardGroup>
-      <BlogCard>
-        <ImgCard variant="top" src={Nether} />
-        <Card.Body>
-          <Card.Title>Card title</Card.Title>
-          <Card.Text>
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content. This content is a little bit longer.
-          </Card.Text>
-        </Card.Body>
-        <Card.Footer>
-          <Like />
-        </Card.Footer>
-      </BlogCard>
-
-      <BlogCard>
-        <ImgCard variant="top" src={Nether} />
-        <Card.Body>
-          <Card.Title>Card title</Card.Title>
-          <Card.Text>
-            This card has supporting text below as a natural lead-in to
-            additional content.{" "}
-          </Card.Text>
-        </Card.Body>
-        <Card.Footer>
-          <Like />
-        </Card.Footer>
-      </BlogCard>
-
-      <BlogCard>
-        <ImgCard variant="top" src={Nether} />
-        <Card.Body>
-          <Card.Title>Card title</Card.Title>
-          <Card.Text>
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content. This card has even longer content than the
-            first to show that equal height action.
-          </Card.Text>
-        </Card.Body>
-        <Card.Footer>
-          <Like />
-        </Card.Footer>
-      </BlogCard>
-
-      <BlogCard>
-        <ImgCard variant="top" src={Nether} />
-        <Card.Body>
-          <Card.Title>Card title</Card.Title>
-          <Card.Text>
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content. This card has even longer content than the
-            first to show that equal height action.
-          </Card.Text>
-        </Card.Body>
-        <Card.Footer>
+          {
+            categories.map((categorie) =>{
+              return <Hashtag>#{categorie}</Hashtag>
+            })
+          }
+          <BookMarks/>
           <Like />
         </Card.Footer>
       </BlogCard>
