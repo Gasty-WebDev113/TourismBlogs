@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const PresentImage = styled.img`
-  height: 90vh;
+  height: 100vh;
   width: 100%;
 `;
 

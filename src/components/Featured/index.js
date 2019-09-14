@@ -7,7 +7,7 @@ import Japan from "../../images/japan.jpg";
 import { BlogCard, ImgCard, Container, Title, Like, BookMarks, Hashtag } from "./styles";
 
 export const FeaturedBlogs = ({titlecard, description, categories, titleofsection}) => (
-  <Container>
+  <Container className="Featured">
     <Title>{titleofsection}</Title>
     <CardGroup>
       <BlogCard md="auto">

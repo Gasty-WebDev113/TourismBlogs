@@ -10,6 +10,8 @@ export const HeaderContainer = styled(Navbar)`
   background: black !important;
   width: 100%;
   text-decoration: none;
+  position: fixed;
+  z-index: 999;
 `;
 
 export const Logo = styled.div`
@@ -47,3 +49,7 @@ export const Link = styled(MenuLink)`
     text-decoration: none;
   }
 `;
+
+export const NavbarIcon = styled(Navbar.Toggle)`
+    background: white;
+` 

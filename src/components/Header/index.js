@@ -8,13 +8,14 @@ import {
   HeaderSingUp,
   MenuItems,
   HeaderContainer,
-  Link
+  Link,
+  NavbarIcon
 } from "./styles";
 
 export const Header = () => (
   <HeaderContainer collapseOnSelect expand="lg" >
   <Navbar.Brand href="#home"><Logo><FaPlane size='3rem' color="white"/></Logo></Navbar.Brand>
-  <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+  <NavbarIcon aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
     <Nav className="mr-auto">
       <MenuItems><Link to="/">Home</Link></MenuItems>

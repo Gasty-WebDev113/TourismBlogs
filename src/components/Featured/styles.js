@@ -34,8 +34,8 @@ export const Hashtag = styled(Badge)`
   transform: translateY(-50%);
   margin-right: 3%;
   cursor: pointer;
-  @media (max-width: 768px){
-    font-size: 0.5rem;
+  @media (max-width: 1080px){
+    display: none;
   }
 
 `
@@ -62,6 +62,7 @@ export const Title = styled.h1`
   margin-bottom: 3%;
   position: relative;
   top: 40px;
+  margin-left: 5rem;
 
   @media (max-width: 768px){
     top: 10px;
