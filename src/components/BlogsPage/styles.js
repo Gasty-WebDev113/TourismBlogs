@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { IoIosHeartEmpty } from "react-icons/io";
 import { MdBookmarkBorder } from "react-icons/md"; 
 import Badge from 'react-bootstrap/Badge'
+import {Link} from 'react-router-dom'
 
 export const Container = styled.div`
     position: absolute;
@@ -28,10 +29,17 @@ export const PreviewImage = styled.img`
     background: blue;
     float: left;
 `
-export const BlogTitle= styled.h1`
-    left: 5%;
+export const BlogTitle= styled(Link)`
+    font-size: 2rem;
+    margin-left: 5%;
     width: 90%;
     position: relative;
+    color: black;
+    
+    &:hover{
+        color: black;
+    }
+
     @media (max-width: 750px){
         font-size: 1.5rem;
     }
@@ -67,7 +75,6 @@ export const HashtagContainer = styled.div`
     float: left;
     width: 50%;
     bottom: 0px;
-
     margin-right: 3%;
     margin-left: 3%;
     @media (max-width: 1024px) and (min-width: 768px){
