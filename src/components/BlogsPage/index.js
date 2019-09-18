@@ -1,10 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import Card from 'react-bootstrap/Card'
-import Image from '../../images/taiwan.jpg'
-import Figure from 'react-bootstrap/Figure'
 import { Container } from './styles'
 import { BlogComponent } from './blogcomponent'
-import axios from 'axios'
 import { Loader } from '../Loader'
 
 export const BlogsPage = () =>{

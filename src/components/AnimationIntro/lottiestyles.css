@@ -1,0 +1,16 @@
+/*Yes, sorry but for make this animation be responsive i need to use css instead of styled.components*/
+
+.AnimatedIntro{
+    height: 100%;
+    width: 100%;
+    background: white
+  }
+
+.AnimatedIntro svg{
+    height: 100% !important;
+    width: 100% !important;
+    position: relative;
+    top: 0px;
+}
+
+/* Im improvising to make this responsive ? YES */

@@ -11,6 +11,7 @@ module.exports = {
   },
 
   module: {
+    
     rules: [
       {
         test: /\.js$/,
@@ -22,13 +23,14 @@ module.exports = {
         use: ["style-loader", "css-loader"],
         exclude: /node_modules/
       },
+      
       {
         test: /\.(jpg|png|gif|woff|mp4|ico)$/,
         use: [
           {
             loader: "url-loader",
             options: {
-              limit: 1000
+              limit: 10000
             }
           }
         ]

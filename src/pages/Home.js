@@ -2,6 +2,7 @@ import React, {Fragment} from "react";
 
 import { Presentation } from "../components/Presentation";
 import { FeaturedBlogs } from "../components/Featured"
+import AnimationIntro  from "../components/AnimationIntro"
 
 let BookmarksSectionTitle = "Your BookMarks"
 let TrendTitle = "Trend Now"
@@ -16,6 +17,7 @@ class Home extends React.Component {
     return (
       <Fragment>
         <Presentation />
+        <AnimationIntro />
         <FeaturedBlogs titlecard={Featuredtitle} description={Featuredesc} categories={Blogcategories} titleofsection={FeaturedSectionTitle}/>
         <FeaturedBlogs titlecard={Featuredtitle} description={Featuredesc} categories={Blogcategories} titleofsection={BookmarksSectionTitle} />
         <FeaturedBlogs titlecard={Featuredtitle} description={Featuredesc} categories={Blogcategories} titleofsection={TrendTitle} />
