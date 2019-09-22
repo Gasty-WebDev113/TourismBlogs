@@ -50,6 +50,10 @@ export const Link = styled(MenuLink)`
   }
 `;
 
+export const SingUpLink = styled(Link)`
+  color: white !important;
+`
+
 export const NavbarIcon = styled(Navbar.Toggle)`
     background: white;
 ` 

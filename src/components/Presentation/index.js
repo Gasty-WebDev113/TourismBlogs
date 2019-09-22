@@ -21,8 +21,8 @@ export const Presentation = () => (
         <PresentImage className="d-block w-100" src={Desert} alt="First slide" />
         <Carousel.Caption>
           <Title>SAHARA</Title>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          <h3>Dessert Time 🏜️</h3>
+          <p>Visit the Sahara's Blogs</p>
           <Button variant="dark" onClick={() => Scroll()}>Let's Start</Button>
         </Carousel.Caption>
       </Carousel.Item>
@@ -35,8 +35,8 @@ export const Presentation = () => (
 
         <Carousel.Caption>
           <Title>NETHERLANDS</Title>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <h3>The best museums of the world 🏛️</h3>
+          <p>Visit the NetherLands's Blogs</p>
           <Button variant="dark" onClick={() => Scroll()}>Let's Start</Button>
         </Carousel.Caption>
       </Carousel.Item>
@@ -45,8 +45,8 @@ export const Presentation = () => (
 
         <Carousel.Caption>
           <Title>HAWAII</Title>
-          <h3>Third slide label</h3>
-          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+          <h3>Beach, Sun and Fun Fun Fun 🏖️</h3>
+          <p>Visit the Hawaii's Blogs</p>
           <Button variant="dark" onClick={() => Scroll()}>Let's Start</Button>
         </Carousel.Caption>
       </Carousel.Item>

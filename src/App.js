@@ -3,9 +3,11 @@ import "./App.css";
 import Home from "./pages/Home";
 import Blogs from './pages/Blogs'
 import CreateBlogs from './pages/CreateBlogs'
+import LoginAndSing from './pages/LoginAndSing'
 import {BlogPage} from './pages/BlogPage'
-import {BrowserRouter, Route} from 'react-router-dom'
 import {Header} from './components/Header'
+import {BrowserRouter, Route} from 'react-router-dom'
+
  
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
           <Route exact path="/blogs" component={Blogs} />
           <Route exact path="/create" component={CreateBlogs} />
           <Route exact path="/blogs/:id" component={BlogPage} />
+          <Route exact path="/login" component={LoginAndSing} />
           
       </BrowserRouter>
     </div>

@@ -9,12 +9,13 @@ import {
   MenuItems,
   HeaderContainer,
   Link,
-  NavbarIcon
+  NavbarIcon,
+  SingUpLink
 } from "./styles";
 
 export const Header = () => (
   <HeaderContainer collapseOnSelect expand="lg" >
-  <Navbar.Brand href="#home"><Logo><FaPlane size='3rem' color="white"/></Logo></Navbar.Brand>
+  <Navbar.Brand href="/"><Logo><FaPlane size='3rem' color="white"/></Logo></Navbar.Brand>
   <NavbarIcon aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
     <Nav className="mr-auto">
@@ -24,6 +25,7 @@ export const Header = () => (
     </Nav>
     
   </Navbar.Collapse>
-  <HeaderSingUp variant="success">Sing Up</HeaderSingUp>
+  <HeaderSingUp variant="success"><SingUpLink to='/login'>Sing Up</SingUpLink></HeaderSingUp>
+ 
 </HeaderContainer>
 );

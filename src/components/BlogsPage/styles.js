@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { IoIosHeartEmpty } from "react-icons/io";
 import { MdBookmarkBorder } from "react-icons/md"; 
 import Badge from 'react-bootstrap/Badge'
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import {Link} from 'react-router-dom'
 
 export const Container = styled.div`
@@ -117,3 +118,14 @@ export const BlogFooter = styled.div`
     background: whitesmoke;
     bottom: -20%;
 `
+
+export const ButtonsCointainer = styled(ButtonGroup)`
+    width: 30%;
+    position: relative; 
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 3%;
+    margin-bottom: 3%;
+`
+
+

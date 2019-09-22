@@ -18,7 +18,7 @@ export default class AnimationIntro extends React.Component {
         return (
             <div className="AnimatedIntro">
                 <Container>
-                    <Title>This is the World Blogs</Title>
+                    <Title>📗It's time to write about your adventures✈️</Title>
                     <Text>{textexample}</Text>
                     <Link to='/create'>
                         <TryButton variant="success">
@@ -30,7 +30,7 @@ export default class AnimationIntro extends React.Component {
                     <FirstAnimation/>
                 </AnimationContainer>
                 <SecondContainer>
-                    <Title>This is the World Blogs</Title>
+                    <Title>🌎This is the World Blogs🌎</Title>
                     <Text>{textexample}</Text>
                     <Link to='/blogs'>
                         <TryButton variant="success">
