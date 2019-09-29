@@ -1,0 +1,13 @@
+type Blogs{
+    id: ID!,
+    Content: String!,
+    Title: String!,
+    Photo: String!,
+    Bookmarks: Boolean!
+    Likes: Int
+}
+
+type Query{
+    "Mira todos los Blogs / See all the blogs"
+    getBlogs:[Blogs]
+}

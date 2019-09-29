@@ -1,35 +1,28 @@
-const express = require('express')
-const { graphql, buildSchema  } = require('graphql')
+const express = require('express');
+const { makeExecutableSchema } = require('graphql-tools');
+const {readFileSync} = require('fs') //This read the graphQl File (Queries)
+const { join } = require('path') 
 const gqlmiddleware = require('express-graphql')
+
+//Importing Resolvers
+const resolvers = require('./graphql/resolvers')
 
 //Express Server
 
 const app = express()
-const port = 3000
+const port = process.env.PORT
  
 //GraphQl const
 
-var Schema = buildSchema(`
-    type Query{ 
-        hello: String
-    }`)
+const typeDefs = readFileSync(join(__dirname, 'graphql', 'schema.graphql'), 'utf-8') //Search schemma
 
-    //Yes, I started the server with a Hello World 
+var Schema = makeExecutableSchema({typeDefs, resolvers}) 
 
-var Root = {
-    hello: ()=>{
-        return "Hello GraphQl Server"
-    }
-}
-
-app.use('/api', gqlmiddleware({
+app.use('/api', gqlmiddleware({ //When you call the api this needs schemma and the rootValue
     schema: Schema,
-    rootValue: Root,
+    rootValue: resolvers,
     graphiql: true
 }))
 
-app.get('/api', function(req, res){
-    res.send('hello')
-})
 
 app.listen(port, ()=>{console.log(`Server listen on port ${port}`)} )
