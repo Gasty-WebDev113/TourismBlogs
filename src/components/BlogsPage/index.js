@@ -1,59 +1,47 @@
-import React, {useState, useEffect} from 'react';
+import React  from 'react';
 import Button from 'react-bootstrap/Button'
 import { Container, ButtonsCointainer } from './styles'
 import { BlogComponent } from './blogcomponent'
 import { Loader } from '../Loader'
+import  NotFound  from '../404/index'
 import { IoMdArrowRoundForward, IoMdArrowRoundBack } from "react-icons/io";
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks';
 
 export const BlogsPage = () =>{
 
-    const [data, setData] = useState([])
-    const [loading, setLoading] = useState(true)
-    const [navigation, setNavigation] = useState(10)
-    const [current, setCurrent] = useState(0)
+    const  GET_BLOGS = gql`
+            {
+            getBlogs{
+                _id
+                Title
+                Photo
+                Likes
+                Bookmarks
+                Content
+                    }
+            }
+    `;
 
-    //I change this api in the future
+    function Blogs(){
+        const { loading, error, data } = useQuery(GET_BLOGS);
+        if (loading) return <Loader/>;
+        if (error) return <NotFound/>;
 
-    useEffect(function(){
-        window.fetch('http://jsonplaceholder.typicode.com/posts')
-        .then(res => res.json())
-        .then(posts =>{
-            console.log(posts)
-            setData(posts)
-            setLoading(false)
-        })
-    }, []);
+        return (
+            
+            data.getBlogs.map(Blog => (
+                <BlogComponent {...Blog} />
+            ))
+        )
 
-    const ChangeBlogs = () => {
-        setNavigation(navigation + 10)
-        setCurrent(current + 10)
     }
-
-    const ReturnBlogs = () => {
-        setNavigation(navigation - 10)
-        setCurrent(current - 10)
-    }
-
-    const sliceddata = data.slice(current, navigation)
 
     return(
         <Container >
-            {
-                loading ? <Loader/> : null
-            }
-            {
-                sliceddata.map(post => <BlogComponent {...post} />)
-            }
-            {
-                loading===false ? 
-                <ButtonsCointainer aria-label="Basic example">
-                    <Button onClick={() => ReturnBlogs()}><IoMdArrowRoundBack/></Button>
-                    <Button onClick={() => ChangeBlogs()}><IoMdArrowRoundForward/></Button>
-                   
-                </ButtonsCointainer> : null
-                
-            }
-            
+            {   
+                Blogs()
+            } 
         </Container>
     )
 }

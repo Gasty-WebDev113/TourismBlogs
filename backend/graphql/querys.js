@@ -3,18 +3,16 @@ const MongoConection = require('../db/db')
 
 module.exports = {
 
-    getBlogs: async ()=>{
+    getBlogs: async () => {
         let DataBase
-        let Blogs = [] //This will contain the blogs information
+        let blogs = [] //This will contain the blogs information
         try {
             DataBase = await MongoConection() //"The patience makes the sage"
-            Blogs = DataBase.collection('Blogs').find().toArray()
+            blogs = DataBase.collection('Blogs').find().toArray()
        } catch (error) {
             console.error(error)
         }
-        return Blogs
+        return blogs
     }
-
-
 
 }

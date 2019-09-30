@@ -1,6 +1,4 @@
 import styled from 'styled-components'
-import { IoIosHeartEmpty } from "react-icons/io";
-import { MdBookmarkBorder } from "react-icons/md"; 
 import Badge from 'react-bootstrap/Badge'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import {Link} from 'react-router-dom'
@@ -9,6 +7,7 @@ export const Container = styled.div`
     position: absolute;
     width: 100%;
     background: whitesmoke;
+    margin-top: 10vh;
 `
 export const BlogPreveiw = styled.div`
     position: relative;
@@ -16,7 +15,7 @@ export const BlogPreveiw = styled.div`
     width: 60%;
     background: white;
     margin: 0 auto;
-    margin-top: 5%;
+    margin-top: 3%;
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.71);
     margin-bottom: 10vh;
     @media (max-width: 750px){
@@ -60,16 +59,6 @@ export const PreviewDescription= styled.p`
     }
    
 `
-
-export const IconsContainer = styled.div`
-    position: absolute;
-    width: 25%;
-    bottom: 0px;
-    right: 0px;
-    margin-right: 3%;
-    margin-bottom: 1%;
-`
-
 export const HashtagContainer = styled.div`
     position: relative;
     display: flex;
@@ -97,19 +86,6 @@ export const Hashtag = styled(Badge)`
   }
 
 `
-export const BookMarks = styled(MdBookmarkBorder)`
-  position: relative;
-  float: right;
-  font-size: 30px;
-`;
-
-
-export const Like = styled(IoIosHeartEmpty)`
-  position: relative;
-  margin-right: 5%;
-  font-size: 30px;
-  float: right;
-`;
 
 export const BlogFooter = styled.div`
     position: absolute;

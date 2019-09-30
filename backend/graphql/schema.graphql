@@ -1,5 +1,7 @@
+#Types 
+
 type Blogs{
-    id: ID!,
+    _id: ID!,
     Content: String!,
     Title: String!,
     Photo: String!,
@@ -7,7 +9,23 @@ type Blogs{
     Likes: Int
 }
 
+#Mutations Types
+
+input BlogCreate{
+    Content: String!,
+    Title: String!,
+    Photo: String!,
+}
+
+#Query
+
 type Query{
     "Mira todos los Blogs / See all the blogs"
     getBlogs:[Blogs]
+}
+
+type Mutation{
+    "Crear Blog / Create Blog"
+    createBlog(input: BlogCreate!): Blogs
+
 }

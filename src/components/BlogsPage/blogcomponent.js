@@ -1,19 +1,21 @@
 import React from 'react'
-import {BlogPreveiw, PreviewImage, BlogTitle, Hashtag, Like, BookMarks,IconsContainer, HashtagContainer,PreviewDescription,BlogFooter } from './styles' 
+import {BlogPreveiw, PreviewImage, BlogTitle, Hashtag, HashtagContainer,PreviewDescription,BlogFooter } from './styles' 
+import { IconsContainer, BookMarks, SavedBookMarks, Like, LikeNumber } from './iconsstyles'
 
-export const BlogComponent = ({ userId, title, body }) =>{
+export const BlogComponent = ({ _id, Title, Photo, Likes, Bookmarks, Content }) =>{
 
 return(
 
     <BlogPreveiw>
         <PreviewImage></PreviewImage>
-        <BlogTitle to={`/blogs/${userId}`}>{title}</BlogTitle>
+        <BlogTitle to={`/blogs/${_id}`}>{Title}</BlogTitle>
         <PreviewDescription>
-        {body}
+        {Content}
         </PreviewDescription>
         <IconsContainer>
-            <BookMarks />
-            <Like />      
+            { Bookmarks ? <BookMarks /> : <SavedBookMarks />}
+            <Like/>   
+            <LikeNumber>{Likes}</LikeNumber>
         </IconsContainer>
                     
         <BlogFooter>

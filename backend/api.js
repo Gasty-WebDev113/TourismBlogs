@@ -1,7 +1,10 @@
 const express = require('express');
+const { join } = require('path') 
+const { path } = require('path')
+var dotenv = require('dotenv').config()
+const cors = require('cors')
 const { makeExecutableSchema } = require('graphql-tools');
 const {readFileSync} = require('fs') //This read the graphQl File (Queries)
-const { join } = require('path') 
 const gqlmiddleware = require('express-graphql')
 
 //Importing Resolvers
@@ -12,6 +15,10 @@ const resolvers = require('./graphql/resolvers')
 const app = express()
 const port = process.env.PORT
  
+//Cors Middleware | Api Permissions
+
+app.use(cors())
+
 //GraphQl const
 
 const typeDefs = readFileSync(join(__dirname, 'graphql', 'schema.graphql'), 'utf-8') //Search schemma
