@@ -28,4 +28,9 @@ type Mutation{
     "Crear Blog / Create Blog"
     createBlog(input: BlogCreate!): Blogs
 
+    "Agregar Like / Add Like"
+    addLike (_id: ID!): Blogs
+
+    "Cambiar Bookmarks / Change Bookmarks"
+    setBookmarks (_id: ID!): Blogs
 }

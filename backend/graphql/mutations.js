@@ -24,6 +24,38 @@ module.exports = {
         }   
 
         return NewBlog //Send to GraphQL the information 
+    },
+
+    addLike: async (root,{_id}) =>{
+        let DataBase
+        let NewLike
+        try {
+            DataBase = await MongoConection() //"The patience makes the sage"
+            await DataBase.collection('Blogs').updateOne(
+                {_id: ObjectID(_id) }, {$inc: {'Likes': 1 } //$inc Increment in 1 the Likes
+            })
+            NewLike = await DataBase.collection('Blogs').findOne({_id: ObjectID(_id)},)
+       } catch (error) {
+            console.error(error)
+        }
+        return NewLike
+            
+    },
+
+    setBookmarks: async (root,{_id}) =>{
+        let DataBase
+        let Bookmarks
+        try {
+            DataBase = await MongoConection() //"The patience makes the sage"
+            await DataBase.collection('Blogs').updateOne(
+                {_id: ObjectID(_id) }, {$set: {'Bookmarks': true } //$inc Increment in 1 the Likes
+            })
+            Bookmarks = await DataBase.collection('Blogs').findOne({_id: ObjectID(_id)}, {Bookmarks})
+       } catch (error) {
+            console.error(error)
+        }
+        return Bookmarks
+            
     }
 
     /* MUTATION EXAMPLE
