@@ -1,4 +1,4 @@
-const { ObjectID } = require('mongo')
+const { ObjectID } = require('mongodb')
 const MongoConection = require('../db/db')
 
 module.exports = {
@@ -15,5 +15,16 @@ module.exports = {
         return blogs
     },
 
+    getBlog: async (root, { _id }) =>{
+        let DataBase
+        let blog
+        try {
+            DataBase = await MongoConection() //"The patience makes the sage"
+            blog = DataBase.collection('Blogs').findOne({_id: ObjectID(_id)})
+       } catch (error) {
+            console.error(error)
+        }
+        return blog
+    }
     
 }

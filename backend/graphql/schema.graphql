@@ -22,6 +22,8 @@ input BlogCreate{
 type Query{
     "Mira todos los Blogs / See all the blogs"
     getBlogs:[Blogs]
+    "Mira un Blog / See a blog"
+    getBlog (_id: ID!): Blogs
 }
 
 type Mutation{

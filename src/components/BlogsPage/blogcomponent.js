@@ -9,8 +9,16 @@ export const BlogComponent = ({ _id, Title, Photo, Likes, Bookmarks, Content }) 
 
     const BlogId = _id
 
+    const LIKE_QUERY = gql`
+        mutation addLike($_id: ID!) {
+                addLike(_id: $_id){
+                    Likes
+                }
+            }
+    `
+
     const  GET_BLOGS = gql`
-            query
+            {
             getBlogs{
                 _id
                 Title
@@ -19,22 +27,24 @@ export const BlogComponent = ({ _id, Title, Photo, Likes, Bookmarks, Content }) 
                 Bookmarks
                 Content
                     }
-            
-    `;
-
-    const LIKE_QUERY = gql`
-        mutation addLike($_id: ID!) {
-                addLike(_id: $_id){
-                    Likes
-                }
             }
-    `
-    const { loading , data } = useQuery(GET_BLOGS);
-    const [addLike, { error }] = useMutation(LIKE_QUERY, {
-        variables: { _id: BlogId }, refetchQueries: [GET_BLOGS]
-    })
+    `;
+    const { loading, error, data } = useQuery(GET_BLOGS, 
+        {variables: { _id: BlogId }}  
+        );
 
+    const [addLike] = useMutation(LIKE_QUERY, { //ALELUYA ESTA MIERDA FUNCIONA !!!!! / ALELUYA THIS SHIT WORKS!!!!!!
+        variables: { _id: BlogId },
+        awaitRefetchQueries: true,
+        refetchQueries: [{ query: GET_BLOGS }]
+    })
     
+    
+
+    function AddLike(){
+        addLike()
+        console.log(data)
+    }
 
 return(
 
@@ -46,7 +56,7 @@ return(
         </PreviewDescription>
         <IconsContainer >
             { Bookmarks ? <BookMarks /> : <SavedBookMarks />}
-            <Like onClick={() => addLike()} />   
+            <Like onClick={() => AddLike()} />   
             <LikeNumber>{Likes}</LikeNumber>
         </IconsContainer>
                     
