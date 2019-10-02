@@ -5,8 +5,9 @@ type Blogs{
     Content: String!,
     Title: String!,
     Photo: String!,
-    Bookmarks: Boolean!
-    Likes: Int
+    Bookmarks: Boolean!,
+    Likes: Int,
+    Liked: Boolean,
 }
 
 #Mutations Types
@@ -33,6 +34,13 @@ type Mutation{
     "Agregar Like / Add Like"
     addLike (_id: ID!): Blogs
 
-    "Cambiar Bookmarks / Change Bookmarks"
+    "Quitar Like / Remove Like | En el futuro removere esta mutacion y mejorare la de agregar "
+    removeLike (_id: ID!): Blogs
+
+    "Agregar Bookmarks / Add Bookmarks"
     setBookmarks (_id: ID!): Blogs
+
+    "Quitar Bookmarks / Remove Bookmarks | En el futuro removere esta mutacion y mejorare la de agregar "
+    removeBookmarks (_id: ID!): Blogs
+
 }

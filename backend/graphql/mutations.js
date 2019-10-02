@@ -7,7 +7,8 @@ module.exports = {
 
         const defaultvalues = {
             Bookmarks: false,
-            Likes: 0
+            Likes: 0,
+            Liked: false,
         }
         const NewBlog = Object.assign(defaultvalues, input) //Join defaults and the information of the input
         let DataBase
@@ -32,8 +33,27 @@ module.exports = {
         try {
             DataBase = await MongoConection() //"The patience makes the sage"
             await DataBase.collection('Blogs').updateOne(
-                {_id: ObjectID(_id) }, {$inc: {'Likes': 1 } //$inc Increment in 1 the Likes
-            })
+                {_id: ObjectID(_id) },
+                 
+                {$set: {'Liked': true}, $inc: {'Likes': 1 }}, //$inc Increment in 1 the Likes
+            )
+            NewLike = await DataBase.collection('Blogs').findOne({_id: ObjectID(_id)},)
+       } catch (error) {
+            console.error(error)
+        }
+        return NewLike
+            
+    },
+
+    removeLike: async (root,{_id}) =>{
+        let DataBase
+        let NewLike
+        try {
+            DataBase = await MongoConection() //"The patience makes the sage"
+            await DataBase.collection('Blogs').updateOne(
+                {_id: ObjectID(_id) }, 
+                {$set: {'Liked': false}, $inc: {'Likes': -1 }}, //$inc Increment in 1 the Likes
+            )
             NewLike = await DataBase.collection('Blogs').findOne({_id: ObjectID(_id)},)
        } catch (error) {
             console.error(error)
@@ -48,7 +68,23 @@ module.exports = {
         try {
             DataBase = await MongoConection() //"The patience makes the sage"
             await DataBase.collection('Blogs').updateOne(
-                {_id: ObjectID(_id) }, {$set: {'Bookmarks': true } //$inc Increment in 1 the Likes
+                {_id: ObjectID(_id) }, {$set: {'Bookmarks': true } 
+            })
+            Bookmarks = await DataBase.collection('Blogs').findOne({_id: ObjectID(_id)}, {Bookmarks})
+       } catch (error) {
+            console.error(error)
+        }
+        return Bookmarks
+            
+    },
+
+    removeBookmarks: async (root,{_id}) =>{
+        let DataBase
+        let Bookmarks
+        try {
+            DataBase = await MongoConection() //"The patience makes the sage"
+            await DataBase.collection('Blogs').updateOne(
+                {_id: ObjectID(_id) }, {$set: {'Bookmarks': false } 
             })
             Bookmarks = await DataBase.collection('Blogs').findOne({_id: ObjectID(_id)}, {Bookmarks})
        } catch (error) {
