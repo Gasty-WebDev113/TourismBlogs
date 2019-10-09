@@ -1,7 +1,55 @@
 const MongoConection = require('../db/db')
 const { ObjectID } = require('mongodb')
+const {login} = require('../auth/auth')
+const {sign} = require('jsonwebtoken')
 
 module.exports = {
+
+    loginUser: async (root, {email, password}, {SECRET})=>{
+        DataBase = await MongoConection()
+        const user = await DataBase.collection('Users').findOne({ Email: email })
+        //First: Search in the database the mail
+        console.log(user)
+        console.log(user.Password)
+        console.log(password)
+
+        if( !user ){
+            throw new Error("No se encontro el usuario :(")
+        }
+
+        if( user.Password !== password ){ //Second: compare the password
+            throw new Error("Contraseña incorrecta")
+        }
+        //succesful login man
+
+        return { //Third: change the success and create the token
+            success: true,
+            token: sign({ userId: user._id }, 'wgobuwrugwoghwor', {expiresIn: "15m" } ) //Store the token, the secret (random string) and options(token expires in 15 minutes) 
+        }
+
+    },
+
+    createUser: async (root, {input}, {SECRET})=>{ //Get the Secret
+
+        if( !input.Username ){
+            throw new Error("El nombre de usuario es obligatorio")
+        }
+
+        const NewUser = input
+        let DataBase
+        let User 
+
+        
+        try {
+            DataBase = await MongoConection()
+            User = await DataBase.collection('Users').insertOne(NewUser)
+            input._id = User.insertId //Mongo autoinsert the ID
+        } catch (error) {
+            console.error("Fallo en la operacion | Faild operation", error)
+        }   
+
+        return NewUser 
+    },
 
     createBlog: async (root, {input})=>{
 
@@ -93,24 +141,5 @@ module.exports = {
         return Bookmarks
             
     }
-
-    /* MUTATION EXAMPLE
-    
-        mutation{
-  createBlog(input:{
-    Title: "Go To Sweden",
-    Content:"Hello this is a Mutation",
-    Photo:"Not Avaible",
-  }) {
-    _id
-    Title
-    Content
-    Title
-    Bookmarks
-		Photo
-  }
-}
-
-    */
 
 }

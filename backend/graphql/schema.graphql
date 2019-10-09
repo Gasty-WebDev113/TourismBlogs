@@ -10,6 +10,22 @@ type Blogs{
     Liked: Boolean,
 }
 
+
+type Users{
+    _id: ID!,
+    Password: String!,
+    Email: String!,
+    Username: String!,
+    FullName: String!,
+}
+
+type Response{
+    success: Boolean,
+    token: String,
+    #This is necessary for the function of the webtoken
+    errors: String,
+}
+
 #Mutations Types
 
 input BlogCreate{
@@ -17,6 +33,14 @@ input BlogCreate{
     Title: String!,
     Photo: String!,
 }
+
+input NewUser{
+    Password: String!,
+    Email: String!,
+    Username: String,
+    FullName: String!,
+}
+
 
 #Query
 
@@ -28,6 +52,12 @@ type Query{
 }
 
 type Mutation{
+    "Crear Usuario / Create User"
+    createUser(input: NewUser!): Users
+
+    "Loguearse / Login"
+    loginUser( email: String! password: String! ): Response
+
     "Crear Blog / Create Blog"
     createBlog(input: BlogCreate!): Blogs
 

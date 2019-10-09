@@ -14,7 +14,8 @@ const resolvers = require('./graphql/resolvers')
 
 const app = express()
 const port = process.env.PORT
- 
+const SECRET = "ghwoeruivbhoeirbhnrowibvnwrpiobnrwoibn" // Json WebToken Secret
+
 //Cors Middleware | Api Permissions
 
 app.use(cors())
@@ -28,7 +29,10 @@ var Schema = makeExecutableSchema({typeDefs, resolvers})
 app.use('/api', gqlmiddleware({ //When you call the api this needs schemma and the rootValue
     schema: Schema,
     rootValue: resolvers,
-    graphiql: true
+    graphiql: true,
+    context: {
+        SECRET //Send to graphql the secret 
+    }
 }))
 
 
