@@ -1,5 +1,14 @@
-import styled from 'styled-components'
+import styled, {keyframes} from 'styled-components'
 import img from '../../images/airport.jpg'
+
+const fade = keyframes`
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+`
 
 export const Image = styled.div`
     height: 100vh;
@@ -8,6 +17,7 @@ export const Image = styled.div`
     background-position: center;
     background-size: cover;
     float: left;
+    animation: ${fade} 1s ease;
 
     @media (max-width: 768px){
         display: none

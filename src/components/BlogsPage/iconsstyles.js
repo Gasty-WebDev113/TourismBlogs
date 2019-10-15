@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 import { IoIosHeartEmpty } from "react-icons/io";
+import { IoIosHeart } from "react-icons/io";
 import { MdBookmarkBorder } from "react-icons/md"; 
 import { MdBookmark } from "react-icons/md"; 
 
@@ -37,6 +38,12 @@ export const Like = styled(IoIosHeartEmpty)`
   font-size: 30px;
   float: right;
 `;
+export const LikedIcon = styled(IoIosHeart)`
+  position: relative;
+  margin-right: 5%;
+  font-size: 30px;
+  float: right;
+`;
 
 export const LikeNumber = styled.h1`
   position: relative;
@@ -44,3 +51,4 @@ export const LikeNumber = styled.h1`
   font-size: 3vh;
   float: right;
 `;
+

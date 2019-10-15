@@ -3,6 +3,8 @@ import Button from "react-bootstrap/Button";
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import { Link as MenuLink } from 'react-router-dom'
+import { MdBook } from "react-icons/md";
+import { MdNotifications } from "react-icons/md";
 //Yes this is an experiment
 
 export const HeaderContainer = styled(Navbar)`
@@ -57,3 +59,32 @@ export const SingUpLink = styled(Link)`
 export const NavbarIcon = styled(Navbar.Toggle)`
     background: white;
 ` 
+
+export const UserPhoto = styled.div`
+  background: gray;
+  height: 6vh;
+  width: 6vh;
+  border-radius: 100%;
+  cursor: pointer;
+  float: right
+`;
+
+export const BookMarks = styled(MdBook)`
+  position: relative;
+  height: 4vh;
+  width: 4vh;
+  color: white;
+  margin-right: 1.5vw;
+  margin-top: 1vh;
+  cursor: pointer;
+`;
+
+export const Notifications = styled(MdNotifications)`
+  position: relative;
+  height: 4vh;
+  width: 4vh;
+  color: white;
+  margin-right: 1.5vw;
+  margin-top: 1vh;
+  cursor: pointer;
+`;

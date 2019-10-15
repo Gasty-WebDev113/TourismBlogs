@@ -19,6 +19,7 @@ export const BlogsPage = () =>{
                 Likes
                 Bookmarks
                 Content
+                Liked
                     }
             }
     `;

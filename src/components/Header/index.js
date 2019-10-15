@@ -1,7 +1,9 @@
 import React from "react";
 import { FaPlane } from "react-icons/fa";
+import { UserLogged } from './headeruserlogged'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
+import Context from '../../Context'
 
 import {
   Logo,
@@ -24,8 +26,17 @@ export const Header = () => (
       <MenuItems><Link to="/create">Create a Blog</Link></MenuItems>
     </Nav>
     
+  <Context.Consumer>
+    {
+      ({Auth})=>
+      Auth
+      ? <UserLogged>Registered</UserLogged>
+      : <HeaderSingUp variant="success"><SingUpLink to='/login'>Sing Up</SingUpLink></HeaderSingUp>
+    }
+  </Context.Consumer>
+
   </Navbar.Collapse>
-  <HeaderSingUp variant="success"><SingUpLink to='/login'>Sing Up</SingUpLink></HeaderSingUp>
+  
  
 </HeaderContainer>
 );

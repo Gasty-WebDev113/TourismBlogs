@@ -1,33 +1,11 @@
 const MongoConection = require('../db/db')
 const { ObjectID } = require('mongodb')
-const {login} = require('../auth/auth')
-const {sign} = require('jsonwebtoken')
+const {login} = require('./loginmutations/login')
+const bcrypt = require('bcrypt')
 
 module.exports = {
 
-    loginUser: async (root, {email, password}, {SECRET})=>{
-        DataBase = await MongoConection()
-        const user = await DataBase.collection('Users').findOne({ Email: email })
-        //First: Search in the database the mail
-        console.log(user)
-        console.log(user.Password)
-        console.log(password)
-
-        if( !user ){
-            throw new Error("No se encontro el usuario :(")
-        }
-
-        if( user.Password !== password ){ //Second: compare the password
-            throw new Error("Contraseña incorrecta")
-        }
-        //succesful login man
-
-        return { //Third: change the success and create the token
-            success: true,
-            token: sign({ userId: user._id }, 'wgobuwrugwoghwor', {expiresIn: "15m" } ) //Store the token, the secret (random string) and options(token expires in 15 minutes) 
-        }
-
-    },
+    loginUser: async (root, {email, password}, {SECRET})=> await login({email ,password}),
 
     createUser: async (root, {input}, {SECRET})=>{ //Get the Secret
 
@@ -38,8 +16,10 @@ module.exports = {
         const NewUser = input
         let DataBase
         let User 
-
         
+        NewUser.Password = await bcrypt.hash(NewUser.Password, 10) //Encrypt the password por SeCUritY 
+        console.log(NewUser.Password)
+
         try {
             DataBase = await MongoConection()
             User = await DataBase.collection('Users').insertOne(NewUser)
