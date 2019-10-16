@@ -9,10 +9,6 @@ import {BlogPage} from './pages/BlogPage'
 import {Header} from './components/Header'
 import {BrowserRouter,Switch, Route, Redirect} from 'react-router-dom'
 import Context from "./Context";
-
-const AuthenticatedRoutes = ({children}) =>{
-  return children({Auth: false})
-}
  
 function App() {
   return (

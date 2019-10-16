@@ -37,8 +37,8 @@ input BlogCreate{
 input NewUser{
     Password: String!,
     Email: String!,
-    Username: String,
-    FullName: String!,
+    Username: String!,
+    FullName: String,
 }
 
 

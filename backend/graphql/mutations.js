@@ -1,6 +1,6 @@
 const MongoConection = require('../db/db')
 const { ObjectID } = require('mongodb')
-const {login} = require('./loginmutations/login')
+const {login} = require('./usermutations/login')
 const bcrypt = require('bcrypt')
 
 module.exports = {
@@ -18,7 +18,6 @@ module.exports = {
         let User 
         
         NewUser.Password = await bcrypt.hash(NewUser.Password, 10) //Encrypt the password por SeCUritY 
-        console.log(NewUser.Password)
 
         try {
             DataBase = await MongoConection()
@@ -28,7 +27,7 @@ module.exports = {
             console.error("Fallo en la operacion | Faild operation", error)
         }   
 
-        return NewUser 
+        return NewUser
     },
 
     createBlog: async (root, {input})=>{

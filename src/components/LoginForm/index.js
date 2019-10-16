@@ -4,12 +4,24 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { Title, PageContainer, FormChanger, LoginMode, RegisterMode, ButtonMode } from './styles'
 import { RegisterFormContainer, LoginFormContainer } from './formstyles'
-import { Redirect } from 'react-router'
+import gql from 'graphql-tag'
+import { useMutation } from '@apollo/react-hooks';
 
 export const LoginForm = () =>{
 
     const [Logindisplaymode, setLoginDisplaymode] = useState(false)
     const [Registerdisplaymode, setRegisterDisplaymode] = useState(true)
+
+    const useInputValue = initialValue =>{ //Manages the values of the form to send to the mutation
+        const [value, setValue] = useState(initialValue) 
+        const onChange = e => setValue(e.target.value) //Takes the event and set the state with the form values
+
+    return { value, onChange } //Returns the data and the event
+    }
+
+    const email = useInputValue('')
+    const username = useInputValue('') 
+    const password = useInputValue('')
 
     const mode = {
         Login: Logindisplaymode,
@@ -26,6 +38,26 @@ export const LoginForm = () =>{
         setRegisterDisplaymode(true)
     }
     
+    const REGISTER_MUTATION = gql`
+        mutation createUser($input: NewUser!) {
+                createUser(input: $input){
+    			    Username
+              }
+            }
+    `
+
+    const LOGIN_MUTATION = gql`
+        mutation loginUser($email: String!, $password: String!) {
+                loginUser(email: $email, password: $password){
+    							errors
+    							token
+    							success
+              }
+            }
+    `
+
+    const [Register, {loading}] = useMutation(REGISTER_MUTATION)
+    const [Login, {error}] = useMutation(LOGIN_MUTATION)
 
     return(
     <PageContainer>
@@ -42,15 +74,19 @@ export const LoginForm = () =>{
         <Context.Consumer>
             {
                 ({setAuth}) => {
-                    const ChangeAuth = () =>{
+                    const RegisterUser = () =>{
+                        let input =  {Username: username.value, Email: email.value, Password: password.value }
+                        Register({ variables: { input: input } })
                         alert("Confirma tu usuario, enviamos la confirmacion a tu correo");
+                        console.log(input)
                         setAuth()
                     }
+
                     return(
-                    <RegisterFormContainer mode={mode} onSubmit={e => {e.preventDefault(); ChangeAuth() }}>
+                    <RegisterFormContainer mode={mode} onSubmit={e=> {e.preventDefault(); RegisterUser()}}>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Username</Form.Label>
-                            <Form.Control type="user" placeholder="Enter Username" />
+                            <Form.Control type="user" placeholder="Enter Username" onChange={username.onChange} value={username.value} />
                             <Form.Text className="text-muted">
                             We'll never share your email with anyone else.
                             </Form.Text>
@@ -58,17 +94,15 @@ export const LoginForm = () =>{
 
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>Email</Form.Label>
-                            <Form.Control type="email" placeholder="Enter Email" />
+                            <Form.Control type="email" placeholder="Enter Email" onChange={email.onChange} value={email.value} />
                         </Form.Group>
 
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Enter Password" />
-                        </Form.Group>
-
-                        <Form.Group controlId="formBasicPassword">
-                            <Form.Label>Repeat Password</Form.Label>
-                            <Form.Control type="password" placeholder="Enter Password" />
+                            <Form.Control type="password" placeholder="Enter Password" onChange={password.onChange} value={password.value} />
+                            <Form.Text className="text-muted">
+                            Please, make you password stronger, because I don't invest in security
+                            </Form.Text>
                         </Form.Group>
 
                         <div>In the future, I add a reCAPTCHA</div>
@@ -84,23 +118,35 @@ export const LoginForm = () =>{
         </Context.Consumer>
 
     {/* Login Form */}
+        <Context.Consumer>
+                {  
+                ({setAuth}) => {
+                    const LoginUser = () =>{
+                        //This not work
+                        Login({ variables: { email: email.value, password: password.value }})
+                        setAuth()
+                    }
+                    return(
+                        <LoginFormContainer mode={mode} onSubmit={e=> {e.preventDefault()}}>
+                        <Form.Group controlId="formBasicPassword">
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control type="email" placeholder="Enter email" onChange={email.onChange} value={email.value} />
+                        </Form.Group>
 
-        <LoginFormContainer mode={mode}>
+                        <Form.Group controlId="formBasicPassword">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type="password" placeholder="Password please" onChange={password.onChange} value={password.value} />
+                        </Form.Group>
 
-            <Form.Group controlId="formBasicPassword">
-                <Form.Label>Email</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" />
-            </Form.Group>
-
-            <Form.Group controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Enter email" />
-            </Form.Group>
-
-            <div>In the future, I add a reCAPTCHA</div>
-            <Button variant="primary" type="submit">
-                Submit
-            </Button>
-        </LoginFormContainer>
+                        <div>In the future, I add a reCAPTCHA</div>
+                        <Button variant="primary" type="submit">
+                            Submit
+                        </Button>
+                    </LoginFormContainer>
+                    )}
+                }
+            
+        </Context.Consumer>
     </PageContainer>
+    
     )}
