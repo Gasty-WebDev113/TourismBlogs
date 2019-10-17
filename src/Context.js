@@ -4,11 +4,14 @@ const Context = createContext()
 
 const Provider = ({children}) => { //Change the provider to make changes the Auth value
     
-    const [Auth, setAuth] = useState(false)
+    const [Auth, setAuth] = useState(() =>{
+        return window.sessionStorage.getItem('token') //If you have the token, this set true
+    } )
 
     const value = {
         Auth,
-        setAuth: () =>{
+        setAuth: (token) =>{
+            window.sessionStorage.setItem('token', token) //Save webtoken in the session storage
             setAuth(true)
         }
     }

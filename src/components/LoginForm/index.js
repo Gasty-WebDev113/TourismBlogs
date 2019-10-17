@@ -49,15 +49,13 @@ export const LoginForm = () =>{
     const LOGIN_MUTATION = gql`
         mutation loginUser($email: String!, $password: String!) {
                 loginUser(email: $email, password: $password){
-    							errors
     							token
-    							success
               }
             }
     `
 
-    const [Register, {loading}] = useMutation(REGISTER_MUTATION)
-    const [Login, {error}] = useMutation(LOGIN_MUTATION)
+    const [Register, {loading: RegisterLoad, error: RegisterError}] = useMutation(REGISTER_MUTATION)
+    const [Login, {error: LoginError, loading: LoginLoad, data }] = useMutation(LOGIN_MUTATION)
 
     return(
     <PageContainer>
@@ -76,10 +74,10 @@ export const LoginForm = () =>{
                 ({setAuth}) => {
                     const RegisterUser = () =>{
                         let input =  {Username: username.value, Email: email.value, Password: password.value }
-                        Register({ variables: { input: input } })
-                        alert("Confirma tu usuario, enviamos la confirmacion a tu correo");
-                        console.log(input)
-                        setAuth()
+                        Register({ variables: { input: input }})
+                        .then(setAuth)
+                        .then(RegisterError || RegisterError===undefined ? null : alert("Confirma tu usuario, enviamos la confirmacion a tu correo"))
+                                
                     }
 
                     return(
@@ -124,10 +122,12 @@ export const LoginForm = () =>{
                     const LoginUser = () =>{
                         //This not work
                         Login({ variables: { email: email.value, password: password.value }})
-                        setAuth()
+                         //First, graphQl validation and second activate Auth
+                        .then(response => {setAuth(response.data.loginUser.token)}) //Send Token to the context and the SessionStorage
+                        
                     }
                     return(
-                        <LoginFormContainer mode={mode} onSubmit={e=> {e.preventDefault()}}>
+                        <LoginFormContainer dissabled={LoginLoad} error={LoginError} mode={mode} onSubmit={e=> {e.preventDefault(); LoginUser()}}>
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>Email</Form.Label>
                             <Form.Control type="email" placeholder="Enter email" onChange={email.onChange} value={email.value} />
@@ -142,6 +142,9 @@ export const LoginForm = () =>{
                         <Button variant="primary" type="submit">
                             Submit
                         </Button>
+                        {
+                            LoginError ? <h2> Usuario o Contraseña incorrectos 😞</h2> : null
+                        }
                     </LoginFormContainer>
                     )}
                 }
