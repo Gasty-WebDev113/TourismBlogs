@@ -26,14 +26,16 @@ const typeDefs = readFileSync(join(__dirname, 'graphql', 'schema.graphql'), 'utf
 
 var Schema = makeExecutableSchema({typeDefs, resolvers}) 
 
-app.use('/api', gqlmiddleware({ //When you call the api this needs schemma and the rootValue
+
+app.use('/api', gqlmiddleware( (request) => ({ //When you call the api this needs schemma and the rootValue
     schema: Schema,
     rootValue: resolvers,
     graphiql: true,
     context: {
-        SECRET //Send to graphql the secret 
+        SECRET, //Send to graphql the secret 1
+        Auth: request.get('authorization')
     }
-}))
+})))
 
 
 app.listen(port, ()=>{console.log(`Server listen on port ${port}`)} )

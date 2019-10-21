@@ -1,7 +1,9 @@
 const MongoConection = require('../db/db')
 const { ObjectID } = require('mongodb')
 const {login} = require('./usermutations/login')
+const {checkUserLogged} = require('./usermutations/check')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 module.exports = {
 
@@ -54,7 +56,10 @@ module.exports = {
         return NewBlog //Send to GraphQL the information 
     },
 
-    addLike: async (root,{_id}) =>{
+    addLike: async (root,{_id}, context) =>{
+
+        checkUserLogged(context)
+
         let DataBase
         let NewLike
         try {
@@ -72,7 +77,10 @@ module.exports = {
             
     },
 
-    removeLike: async (root,{_id}) =>{
+    removeLike: async (root,{_id}, context) =>{
+
+        checkUserLogged(context)
+
         let DataBase
         let NewLike
         try {
@@ -89,7 +97,7 @@ module.exports = {
             
     },
 
-    setBookmarks: async (root,{_id}) =>{
+    setBookmarks: async (root,{_id}, context) =>{
         let DataBase
         let Bookmarks
         try {
@@ -105,7 +113,7 @@ module.exports = {
             
     },
 
-    removeBookmarks: async (root,{_id}) =>{
+    removeBookmarks: async (root,{_id}, context) =>{
         let DataBase
         let Bookmarks
         try {
