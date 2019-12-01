@@ -8,15 +8,17 @@ type Blogs{
     Bookmarks: Boolean!,
     Likes: Int,
     Liked: Boolean,
+    userID: ID,
 }
 
 
-type Users{
+type User{
     _id: ID!,
     Password: String!,
     Email: String!,
     Username: String!,
     FullName: String!,
+    LikedBlog: [String],
 }
 
 type Response{
@@ -39,6 +41,7 @@ input NewUser{
     Email: String!,
     Username: String!,
     FullName: String,
+    LikedBlog: [String],
 }
 
 
@@ -47,13 +50,17 @@ input NewUser{
 type Query{
     "Mira todos los Blogs / See all the blogs"
     getBlogs:[Blogs]
+
+    "Mira todos los Blogs del Usuario Loggeado / See all the blogs of User Logged"
+    getBlogsUserLogged(_id: ID):[Blogs]
+
     "Mira un Blog / See a blog"
     getBlog (_id: ID!): Blogs
 }
 
 type Mutation{
     "Crear Usuario / Create User"
-    createUser(input: NewUser!): Users
+    createUser(input: NewUser!): Response
 
     "Loguearse / Login"
     loginUser( email: String! password: String! ): Response
@@ -61,11 +68,8 @@ type Mutation{
     "Crear Blog / Create Blog"
     createBlog(input: BlogCreate!): Blogs
 
-    "Agregar Like / Add Like"
+    "Manejador de Like / Like Manager"
     addLike (_id: ID!): Blogs
-
-    "Quitar Like / Remove Like | En el futuro removere esta mutacion y mejorare la de agregar "
-    removeLike (_id: ID!): Blogs
 
     "Agregar Bookmarks / Add Bookmarks"
     setBookmarks (_id: ID!): Blogs

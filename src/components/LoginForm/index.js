@@ -41,7 +41,7 @@ export const LoginForm = () =>{
     const REGISTER_MUTATION = gql`
         mutation createUser($input: NewUser!) {
                 createUser(input: $input){
-    			    Username
+                    token
               }
             }
     `
@@ -75,7 +75,7 @@ export const LoginForm = () =>{
                     const RegisterUser = () =>{
                         let input =  {Username: username.value, Email: email.value, Password: password.value }
                         Register({ variables: { input: input }})
-                        .then(setAuth)
+                        .then(response => {setAuth(response.data.createUser.token)}) //Send Token to the context and the SessionStorage
                         .then(RegisterError || RegisterError===undefined ? null : alert("Confirma tu usuario, enviamos la confirmacion a tu correo"))
                                 
                     }

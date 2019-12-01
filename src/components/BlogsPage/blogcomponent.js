@@ -1,14 +1,12 @@
 import React from 'react'
 import gql from 'graphql-tag';
 import { useMutation, useQuery } from '@apollo/react-hooks';
-
+import Context from '../../Context'
 import {BlogPreveiw, PreviewImage, BlogTitle, Hashtag, HashtagContainer,PreviewDescription,BlogFooter } from './styles' 
 import { IconsContainer, BookMarks, SavedBookMarks, Like, LikeNumber, LikedIcon } from './iconsstyles'
 
 export const BlogComponent = ({ _id, Title, Photo, Likes, Bookmarks, Content, Liked }) =>{
-
     const BlogId = _id
-
     const LIKE_QUERY = gql`
         mutation addLike($_id: ID!) {
                 addLike(_id: $_id){
@@ -31,13 +29,6 @@ export const BlogComponent = ({ _id, Title, Photo, Likes, Bookmarks, Content, Li
                 }
             }
     `
-    const REMOVE_QUERY = gql`
-        mutation removeLike($_id: ID!) {
-            removeLike(_id: $_id){
-                    Likes
-                }
-            }
-    `
     const  GET_BLOGS = gql`
             {
             getBlogs{
@@ -48,22 +39,18 @@ export const BlogComponent = ({ _id, Title, Photo, Likes, Bookmarks, Content, Li
                     }
             }
     `;
+
+
     const { error, data } = useQuery(GET_BLOGS);
 
-    const [addLike, {loading : addloading}] = useMutation(LIKE_QUERY, { //ALELUYA ESTA MIERDA FUNCIONA !!!!! / ALELUYA THIS SHIT WORKS!!!!!!
-        variables: { _id: BlogId },
-        awaitRefetchQueries: true,
-        refetchQueries: [{ query: GET_BLOGS }]
-    })
-
-    const [removeLike, {loading : removeloading}] = useMutation(REMOVE_QUERY, { //In the future I refactorize this function and mutation
+    const [addLike, {loading}] = useMutation(LIKE_QUERY, { //ALELUYA ESTA MIERDA FUNCIONA !!!!! / ALELUYA THIS SHIT WORKS!!!!!!
         variables: { _id: BlogId },
         awaitRefetchQueries: true,
         refetchQueries: [{ query: GET_BLOGS }]
     })
 
     const Liker = () =>{
-        removeloading | addloading ? console.log("Cargando....") : (Liked ? removeLike() : addLike())
+        loading ? console.log("Cargando....") : (addLike())
     }
     
     //Bookmarks
@@ -95,7 +82,16 @@ return(
         </PreviewDescription>
         <IconsContainer >
             { Bookmarks ? <BookMarks onClick={() => BookmarksChange() }/> : <SavedBookMarks onClick={() => BookmarksChange()} />}
-            { Liked ?  <LikedIcon onClick={() => Liker()}/> :  <Like onClick={() => Liker()} />} 
+            <Context.Consumer>
+                {
+                    value => {
+                    if(value.Auth !== null){
+                       return Liked ?  <LikedIcon onClick={() => Liker()}/> :  <Like onClick={() => Liker()} />
+                    }else{
+                        return <Like onClick={() => alert("Para poder hacer like necesitas estar loggeado")} />} 
+                    }
+                }
+            </Context.Consumer>
             <LikeNumber>{Likes}</LikeNumber>
         </IconsContainer>
                     

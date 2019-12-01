@@ -2,8 +2,9 @@ const MongoConection = require('../db/db')
 const { ObjectID } = require('mongodb')
 const {login} = require('./usermutations/login')
 const {checkUserLogged} = require('./usermutations/check')
+const {addBlogLiked,removeBlogLiked, AddLike, RemoveLike} = require('./usermutations/getLikesandBookmarks')
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+const {sign} = require('jsonwebtoken')
 
 module.exports = {
 
@@ -15,7 +16,11 @@ module.exports = {
             throw new Error("El nombre de usuario es obligatorio")
         }
 
-        const NewUser = input
+        const defaultList = {
+            LikedBlog: []
+        }
+        const NewUser = Object.assign(defaultList, input)
+
         let DataBase
         let User 
         
@@ -27,9 +32,12 @@ module.exports = {
             input._id = User.insertId //Mongo autoinsert the ID
         } catch (error) {
             console.error("Fallo en la operacion | Faild operation", error)
-        }   
-
-        return NewUser
+        } 
+        console.log(String(User.insertedId))
+        return {
+            token: sign({ userId: String(User.insertedId)}, 'wgobuwrugwoghwor', {expiresIn: "15m" } ), //Store the token, the secret (random string) and options(token expires in 15 minutes)   
+            success: true,
+        }
     },
 
     createBlog: async (root, {input})=>{
@@ -56,45 +64,25 @@ module.exports = {
         return NewBlog //Send to GraphQL the information 
     },
 
-    addLike: async (root,{_id}, context) =>{
+    addLike: async (parent, args, context) =>{
+        const { _id } = args
+        let DataBase = await MongoConection()
+        let Blogid = _id
 
-        checkUserLogged(context)
+        const userAuth = checkUserLogged(context.auth) //Send the JsonWebToken and return the userId to makes queries
+        
+        const userInfo = await DataBase.collection('Users').findOne({_id: ObjectID(userAuth)}) //Find the user Information
+        const LikeVerify = userInfo.LikedBlog.includes(_id) //This search the blog id in the list of ids
+        console.log(LikeVerify)
 
-        let DataBase
-        let NewLike
-        try {
-            DataBase = await MongoConection() //"The patience makes the sage"
-            await DataBase.collection('Blogs').updateOne(
-                {_id: ObjectID(_id) },
-                 
-                {$set: {'Liked': true}, $inc: {'Likes': 1 }}, //$inc Increment in 1 the Likes
-            )
-            NewLike = await DataBase.collection('Blogs').findOne({_id: ObjectID(_id)},)
-       } catch (error) {
-            console.error(error)
-        }
-        return NewLike
-            
-    },
-
-    removeLike: async (root,{_id}, context) =>{
-
-        checkUserLogged(context)
-
-        let DataBase
-        let NewLike
-        try {
-            DataBase = await MongoConection() //"The patience makes the sage"
-            await DataBase.collection('Blogs').updateOne(
-                {_id: ObjectID(_id) }, 
-                {$set: {'Liked': false}, $inc: {'Likes': -1 }}, //$inc Increment in 1 the Likes
-            )
-            NewLike = await DataBase.collection('Blogs').findOne({_id: ObjectID(_id)},)
-       } catch (error) {
-            console.error(error)
-        }
-        return NewLike
-            
+        if(LikeVerify){
+            RemoveLike(Blogid)
+            removeBlogLiked({ userid: userAuth, Blogid })  
+        }else{
+            AddLike(Blogid) 
+            addBlogLiked({ userid: userAuth, Blogid })
+        } 
+        return LikeVerify    
     },
 
     setBookmarks: async (root,{_id}, context) =>{

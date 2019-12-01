@@ -8,10 +8,16 @@ const { ObjectID } = require('mongodb')
         return user
     };
     
-    function checkUserLogged(context){
-        var decoded = jwt.decode(context.Auth, 'wgobuwrugwoghwor'); //Decoding the token
+    function checkUserLogged(Auth){
+        console.log(Auth)
+        const token = Auth.replace('Bearer ','');
 
-        if(!decoded) throw new Error('Tienes que estar loggeado para realizar esta accion')
+        if(!token) throw new Error('Tienes que estar loggeado para realizar esta accion')
+        var decoded = jwt.decode(`${token}`, 'wgobuwrugwoghwor'); //Decoding the token
+        let userId = decoded.userId
+        if(!userId) throw new Error('Tienes que estar loggeado para realizar esta accion')
+
+        return userId
     }
 
-module.exports = {checkUserLogged}
+module.exports = {checkUserLogged, findUser}

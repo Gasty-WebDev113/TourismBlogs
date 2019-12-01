@@ -5,7 +5,8 @@ var dotenv = require('dotenv').config()
 const cors = require('cors')
 const { makeExecutableSchema } = require('graphql-tools');
 const {readFileSync} = require('fs') //This read the graphQl File (Queries)
-const gqlmiddleware = require('express-graphql')
+const graphqlHTTP = require('express-graphql')
+const { ApolloServer, gql } = require('apollo-server');
 
 //Importing Resolvers
 const resolvers = require('./graphql/resolvers')
@@ -27,15 +28,28 @@ const typeDefs = readFileSync(join(__dirname, 'graphql', 'schema.graphql'), 'utf
 var Schema = makeExecutableSchema({typeDefs, resolvers}) 
 
 
-app.use('/api', gqlmiddleware( (request) => ({ //When you call the api this needs schemma and the rootValue
+/*app.use('/api', graphqlHTTP((request) => ({ //When you call the api this needs schemma and the rootValue
     schema: Schema,
-    rootValue: resolvers,
+    rootValue: resolvers,  
+    context: { startTime: Date.now() },
     graphiql: true,
-    context: {
-        SECRET, //Send to graphql the secret 1
-        Auth: request.get('authorization')
-    }
-})))
+    extensions,
+     //AuthToken: String(request.headers.authorization)
+})))*/
+
+const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    context: ({req}) => ({
+        auth: req.headers.authorization || 'nothing'
+    })
+  })
+
+server.listen().then(({ url }) => {
+    console.log(`🚀  Server ready at ${url}`);
+}); 
 
 
-app.listen(port, ()=>{console.log(`Server listen on port ${port}`)} )
+  
+
+//app.listen(port, ()=>{console.log(`Server listen on port ${port}`)} )
