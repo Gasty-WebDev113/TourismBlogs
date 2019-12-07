@@ -33,9 +33,8 @@ module.exports = {
         } catch (error) {
             console.error("Fallo en la operacion | Faild operation", error)
         } 
-        console.log(String(User.insertedId))
         return {
-            token: sign({ userId: String(User.insertedId)}, 'wgobuwrugwoghwor', {expiresIn: "15m" } ), //Store the token, the secret (random string) and options(token expires in 15 minutes)   
+            token: sign({ userId: String(User.insertedId)}, process.env.SECRET, {expiresIn: "15m" } ), //Store the token, the secret (random string) and options(token expires in 15 minutes)   
             success: true,
         }
     },
@@ -73,7 +72,6 @@ module.exports = {
         
         const userInfo = await DataBase.collection('Users').findOne({_id: ObjectID(userAuth)}) //Find the user Information
         const LikeVerify = userInfo.LikedBlog.includes(_id) //This search the blog id in the list of ids
-        console.log(LikeVerify)
 
         if(LikeVerify){
             RemoveLike(Blogid)

@@ -9,7 +9,6 @@ module.exports={
         DataBase = await MongoConection()
         const user = await DataBase.collection('Users').findOne({ Email: email })
         //First: Search in the database the mail
-        console.log(user)
 
         if( user == null){
             throw new Error("Usuario incorrecto :(")
@@ -25,11 +24,10 @@ module.exports={
             throw new Error("Contraseña incorrecta")
         }
         //succesful login man
-        console.log(user.Password, password)
 
         return { //Third: change the success and create the token
             success: true,
-            token: sign({ userId: user._id }, 'wgobuwrugwoghwor', {expiresIn: "15m" } ) //Store the token, the secret (random string) and options(token expires in 15 minutes) 
+            token: sign({ userId: user._id }, process.env.SECRET, {expiresIn: "15m" } ) //Store the token, the secret (random string) and options(token expires in 15 minutes) 
         }
     }
 

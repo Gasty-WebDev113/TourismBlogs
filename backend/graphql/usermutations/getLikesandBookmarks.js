@@ -8,8 +8,6 @@ module.exports = {
         let LikedBlogs = await DataBase.collection('Blogs').find(
             {$filter: ["5d9206ab45145e28c0c44fe4"]}
         )
-        console.log(LikedBlogs)
-
         return "Hello"
     },
 
