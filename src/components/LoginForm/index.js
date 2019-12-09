@@ -77,7 +77,6 @@ export const LoginForm = () =>{
                         Register({ variables: { input: input }})
                         .then(response => {setAuth(response.data.createUser.token)}) //Send Token to the context and the SessionStorage
                         .then(RegisterError || RegisterError===undefined ? null : alert("Confirma tu usuario, enviamos la confirmacion a tu correo"))
-                                
                     }
 
                     return(
@@ -124,7 +123,6 @@ export const LoginForm = () =>{
                         Login({ variables: { email: email.value, password: password.value }})
                          //First, graphQl validation and second activate Auth
                         .then(response => {setAuth(response.data.loginUser.token)}) //Send Token to the context and the SessionStorage
-                        
                     }
                     return(
                         <LoginFormContainer dissabled={LoginLoad} error={LoginError} mode={mode} onSubmit={e=> {e.preventDefault(); LoginUser()}}>
@@ -139,7 +137,7 @@ export const LoginForm = () =>{
                         </Form.Group>
 
                         <div>In the future, I add a reCAPTCHA</div>
-                        <Button variant="primary" type="submit">
+                        <Button variant="primary" type="submit" >
                             Submit
                         </Button>
                         {

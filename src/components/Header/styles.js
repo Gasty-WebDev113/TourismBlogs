@@ -62,11 +62,19 @@ export const NavbarIcon = styled(Navbar.Toggle)`
 
 export const UserPhoto = styled.div`
   background: gray;
-  height: 6vh;
-  width: 6vh;
+  height: 7vh;
+  width: 7vh;
   border-radius: 100%;
   cursor: pointer;
   float: right
+`;
+
+export const UserPhotoAlternative = styled.h1`
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 5.5vh;
 `;
 
 export const BookMarks = styled(MdBook)`

@@ -15,7 +15,7 @@ const clientconect = new ApolloClient({
         const token = window.sessionStorage.getItem('token')
         operation.setContext({
             headers: {
-                authorization: token ? `Bearer ${token}` : null
+                authorization: token ? `Bearer ${token}` : ''
             }
         })
     }

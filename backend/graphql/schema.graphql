@@ -53,6 +53,9 @@ type Query{
     
     "Mira un Blog / See a blog"
     getBlog (_id: ID!): Blogs
+
+    "Trae la informacion del usuario"
+    getUserInfo:User
 }
 
 type Mutation{

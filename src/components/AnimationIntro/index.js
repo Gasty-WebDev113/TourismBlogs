@@ -41,8 +41,6 @@ export default class AnimationIntro extends React.Component {
                 <SecondAnimationContainer>
                     <SecondAnimation />
                 </SecondAnimationContainer>
-                
-                
             </div>
         )
 }}

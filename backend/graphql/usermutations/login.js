@@ -27,7 +27,7 @@ module.exports={
 
         return { //Third: change the success and create the token
             success: true,
-            token: sign({ userId: user._id }, process.env.SECRET, {expiresIn: "15m" } ) //Store the token, the secret (random string) and options(token expires in 15 minutes) 
+            token: sign({ userId: user._id }, process.env.SECRET, {expiresIn: '1h' } ) //Store the token, the secret (random string) and options(token expires in 15 minutes) 
         }
     }
 

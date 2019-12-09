@@ -3,14 +3,6 @@ const { ObjectID } = require('mongodb')
 
 module.exports = {
 
-    ListofLikedBlogs: async ({ id, likedblogs }) =>{
-        let DataBase = await MongoConection()
-        let LikedBlogs = await DataBase.collection('Blogs').find(
-            {$filter: ["5d9206ab45145e28c0c44fe4"]}
-        )
-        return "Hello"
-    },
-
     removeBlogLiked: async ({ userid, Blogid }) => {
         try {
             let DataBase = await MongoConection()

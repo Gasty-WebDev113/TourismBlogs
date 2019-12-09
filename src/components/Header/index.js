@@ -1,6 +1,6 @@
 import React from "react";
 import { FaPlane } from "react-icons/fa";
-import { UserLogged } from './headeruserlogged'
+import { UserLogged } from './components/UserLogged'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Context from '../../Context'
@@ -30,7 +30,7 @@ export const Header = () => (
     {
       ({Auth})=>
       Auth
-      ? <UserLogged>Registered</UserLogged>
+      ? <UserLogged />
       : <HeaderSingUp variant="success"><SingUpLink to='/login'>Sing Up</SingUpLink></HeaderSingUp>
     }
   </Context.Consumer>

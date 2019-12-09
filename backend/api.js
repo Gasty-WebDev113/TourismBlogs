@@ -5,7 +5,6 @@ var dotenv = require('dotenv').config()
 const cors = require('cors')
 const { makeExecutableSchema } = require('graphql-tools');
 const {readFileSync} = require('fs') //This read the graphQl File (Queries)
-const graphqlHTTP = require('express-graphql')
 const { ApolloServer, gql } = require('apollo-server');
 
 //Importing Resolvers

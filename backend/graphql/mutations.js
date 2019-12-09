@@ -1,43 +1,15 @@
 const MongoConection = require('../db/db')
 const { ObjectID } = require('mongodb')
+//User functions
 const {login} = require('./usermutations/login')
-const {checkUserLogged} = require('./usermutations/check')
-const {addBlogLiked,removeBlogLiked, AddLike, RemoveLike} = require('./usermutations/getLikesandBookmarks')
-const bcrypt = require('bcrypt')
-const {sign} = require('jsonwebtoken')
+const {register} = require('./usermutations/register')
+const {addlike} = require('./usermutations/addlike')
 
 module.exports = {
 
-    loginUser: async (root, {email, password}, {SECRET})=> await login({email ,password}),
+    loginUser: async (root, {email, password})=> await login({email ,password}),
 
-    createUser: async (root, {input}, {SECRET})=>{ //Get the Secret
-
-        if( !input.Username ){
-            throw new Error("El nombre de usuario es obligatorio")
-        }
-
-        const defaultList = {
-            LikedBlog: []
-        }
-        const NewUser = Object.assign(defaultList, input)
-
-        let DataBase
-        let User 
-        
-        NewUser.Password = await bcrypt.hash(NewUser.Password, 10) //Encrypt the password por SeCUritY 
-
-        try {
-            DataBase = await MongoConection()
-            User = await DataBase.collection('Users').insertOne(NewUser)
-            input._id = User.insertId //Mongo autoinsert the ID
-        } catch (error) {
-            console.error("Fallo en la operacion | Faild operation", error)
-        } 
-        return {
-            token: sign({ userId: String(User.insertedId)}, process.env.SECRET, {expiresIn: "15m" } ), //Store the token, the secret (random string) and options(token expires in 15 minutes)   
-            success: true,
-        }
-    },
+    createUser: async (root, {input})=> await register({input}),
 
     createBlog: async (root, {input})=>{
 
@@ -63,25 +35,7 @@ module.exports = {
         return NewBlog //Send to GraphQL the information 
     },
 
-    addLike: async (parent, args, context) =>{
-        const { _id } = args
-        let DataBase = await MongoConection()
-        let Blogid = _id
-
-        const userAuth = checkUserLogged(context.auth) //Send the JsonWebToken and return the userId to makes queries
-        
-        const userInfo = await DataBase.collection('Users').findOne({_id: ObjectID(userAuth)}) //Find the user Information
-        const LikeVerify = userInfo.LikedBlog.includes(_id) //This search the blog id in the list of ids
-
-        if(LikeVerify){
-            RemoveLike(Blogid)
-            removeBlogLiked({ userid: userAuth, Blogid })  
-        }else{
-            AddLike(Blogid) 
-            addBlogLiked({ userid: userAuth, Blogid })
-        } 
-        return LikeVerify    
-    },
+    addLike: async (parent, {_id}, context) =>{await addlike(context, _id)},
 
     setBookmarks: async (root,{_id}, context) =>{
         let DataBase

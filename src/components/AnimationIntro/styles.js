@@ -6,13 +6,14 @@ export const Container = styled.div`
     width: 50vw;
     height: 100%;
     float: right;
-    margin-right: 5%
+    margin-right: 5%;
+
 `
 
 export const SecondContainer = styled(Container)`
     float: left;
     position: absolute; 
-    width: 50vw;
+    width: 50vw; 
 `
 
 export const AnimationContainer = styled.div`
@@ -34,16 +35,26 @@ export const SecondAnimationContainer = styled(AnimationContainer)`
 export const Title = styled.h1`
     text-align: center;
     font-size: 3vw;
-    margin-top: 10vh;
+    margin-top: 2vh;
     margin-bottom: 4vh;
     position: relative;
     left: 0px;
+    @media (max-width: 450px){
+        margin-top: 1vw;
+        margin-bottom: 2vw;
+    }
 `
 
 export const Text = styled.p`
     position: relative;
     text-align: center;
     right: 0px;
+    @media (max-width: 825px){
+        display:none
+    }
+    @media (min-width: 825px){
+        font-size: 1.5vw
+    }
 `
 
 export const TryButton = styled(Button)`
@@ -51,5 +62,7 @@ export const TryButton = styled(Button)`
     transform: translate(-50%, 0%) !important;
     position: absolute !important;
     margin-top: 2vh;
-    
+    @media (max-width: 450px){
+        font-size: 4vw
+    }
 `

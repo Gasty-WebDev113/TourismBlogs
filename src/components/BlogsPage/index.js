@@ -28,16 +28,12 @@ export const BlogsPage = () =>{
         const { loading, error, data } = useQuery(GET_BLOGS);
         if (loading) return <Loader/>;
         if (error) return <NotFound/>;
-
         return (
             
             data.getBlogs.map(Blog => (
                 <BlogComponent {...Blog} />
             ))
-        )
-
-    }
-
+        )}
     return(
         <Container >
             {   
