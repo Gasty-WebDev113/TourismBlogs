@@ -5,24 +5,12 @@ import { BlogComponent } from './blogcomponent'
 import { Loader } from '../Loader'
 import  NotFound  from '../404/index'
 import { IoMdArrowRoundForward, IoMdArrowRoundBack } from "react-icons/io";
-import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
+import {GET_BLOGS} from '../../constants/gqltags'
 
 export const BlogsPage = () =>{
 
-    const  GET_BLOGS = gql`
-            {
-            getBlogs{
-                _id
-                Title
-                Photo
-                Likes
-                Bookmarks
-                Content
-                Liked
-                    }
-            }
-    `;
+    
 
     function Blogs(){
         const { loading, error, data } = useQuery(GET_BLOGS);

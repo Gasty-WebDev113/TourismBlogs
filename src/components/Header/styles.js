@@ -75,6 +75,19 @@ export const UserPhotoAlternative = styled.h1`
   text-align: center;
   font-weight: bolder;
   font-size: 5.5vh;
+  vertical-align: middle
+`;
+
+export const Username = styled.h1`
+  font-weight: bolder;
+  font-size: 4vh;
+  color: white;
+  right: 15vw;
+  position: absolute;
+  line-height: 7vh;
+  @media (max-width: 425px) {
+    right: 25vw;
+  }
 `;
 
 export const BookMarks = styled(MdBook)`

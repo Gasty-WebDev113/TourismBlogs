@@ -4,8 +4,8 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { Title, PageContainer, FormChanger, LoginMode, RegisterMode, ButtonMode } from './styles'
 import { RegisterFormContainer, LoginFormContainer } from './formstyles'
-import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks';
+import { REGISTER_MUTATION, LOGIN_MUTATION } from '../../constants/gqltags'
 
 export const LoginForm = () =>{
 
@@ -38,21 +38,7 @@ export const LoginForm = () =>{
         setRegisterDisplaymode(true)
     }
     
-    const REGISTER_MUTATION = gql`
-        mutation createUser($input: NewUser!) {
-                createUser(input: $input){
-                    token
-              }
-            }
-    `
-
-    const LOGIN_MUTATION = gql`
-        mutation loginUser($email: String!, $password: String!) {
-                loginUser(email: $email, password: $password){
-    							token
-              }
-            }
-    `
+    
 
     const [Register, {loading: RegisterLoad, error: RegisterError}] = useMutation(REGISTER_MUTATION)
     const [Login, {error: LoginError, loading: LoginLoad, data }] = useMutation(LOGIN_MUTATION)
