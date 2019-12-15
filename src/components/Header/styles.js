@@ -14,6 +14,7 @@ export const HeaderContainer = styled(Navbar)`
   text-decoration: none;
   position: fixed;
   z-index: 999;
+  top: 0;
 `;
 
 export const Logo = styled.div`
@@ -75,18 +76,28 @@ export const UserPhotoAlternative = styled.h1`
   text-align: center;
   font-weight: bolder;
   font-size: 5.5vh;
-  vertical-align: middle
+  vertical-align: middle;
+  color: white !important;
+  text-decoration: none;
+
 `;
 
-export const Username = styled.h1`
+export const Username = styled(Link)`
   font-weight: bolder;
   font-size: 4vh;
   color: white;
   right: 15vw;
   position: absolute;
   line-height: 7vh;
+  color: white !important;
   @media (max-width: 425px) {
     right: 25vw;
+  }
+  @media (min-width: 430px) and (max-width: 768px) {
+    right: 10vw;
+  }
+  @media (min-width: 770px) and (max-width: 1225px){
+    right: 20vw;
   }
 `;
 

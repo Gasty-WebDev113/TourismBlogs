@@ -19,6 +19,7 @@ type User{
     Username: String!,
     FullName: String!,
     LikedBlog: [String],
+    BookmarksList: [String],
 }
 
 type Response{
@@ -56,6 +57,9 @@ type Query{
 
     "Trae la informacion del usuario"
     getUserInfo:User
+
+    "Trae la informacion un usuario"
+    getUser(Username: String!):User
 }
 
 type Mutation{

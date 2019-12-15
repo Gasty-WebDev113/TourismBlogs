@@ -57,4 +57,13 @@ module.exports = {
         console.log(UserInfo)
         return UserInfo
     },    
+
+    getUser: async (parent, {Username}) =>{
+        
+        let DataBase = await MongoConection()
+
+        const Info = await DataBase.collection('Users').findOne({'Username': `${Username}`})
+        console.log(Info)
+        return Info
+    },
 }

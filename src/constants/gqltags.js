@@ -31,8 +31,6 @@ export const  GET_BLOGS = gql`
             }
     `;
 
-
-
 export const LIKE_QUERY = gql`
     mutation addLike($_id: ID!) {
             addLike(_id: $_id){
@@ -48,13 +46,25 @@ export const  GET_USER_INFO = gql`
                 }
         `;
 
+export const  GET_USER = gql`
+            query getUser($Username: String!){
+                getUser(Username: $Username){
+                    Username
+                    Email
+                    LikedBlog
+                    BookmarksList
+                    FullName
+                }
+            }
+        `;
+
 export const REGISTER_MUTATION = gql`
         mutation createUser($input: NewUser!) {
                 createUser(input: $input){
                     token
               }
             }
-    `
+    `;
 
 export const LOGIN_MUTATION = gql`
         mutation loginUser($email: String!, $password: String!) {

@@ -6,6 +6,7 @@ import CreateBlogs from './pages/CreateBlogs'
 import LoginAndSing from './pages/LoginAndSing'
 import NotRegistered from './pages/NotRegistered'
 import {BlogPage} from './pages/BlogPage'
+import {UserPage} from './pages/UserPage'
 import {Header} from './components/Header'
 import {BrowserRouter,Switch, Route, Redirect} from 'react-router-dom'
 import Context from "./Context";
@@ -19,14 +20,19 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/blogs" component={Blogs} />
           <Route exact path="/blogs/:id" component={BlogPage} />
+          <Route exact path="/user/:id" component={UserPage}/>
+
 
           <Context.Consumer>
             {
-              ({Auth})=>
-                Auth
+              (value)=>
+              
+              value.Auth
                  ? <Switch>
                   <Route exact path="/create" component={CreateBlogs} />
-                  <Redirect to="/"/>
+                  <Route exact path="/login" component={LoginAndSing}>
+                    <Redirect to="/"/>
+                  </Route>
                 </Switch>
                 :
                 <Switch>

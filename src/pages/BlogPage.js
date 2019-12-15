@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {BlogDetail} from '../components/BlogDetail'
 
 export const BlogPage = ({match}) =>(

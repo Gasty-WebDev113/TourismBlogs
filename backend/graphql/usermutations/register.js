@@ -11,7 +11,9 @@ module.exports = {
         }
         
         const defaultList = {
-            LikedBlog: []
+            LikedBlog: [],
+            BookmarksList: [],
+            Name: ''
         }
         const NewUser = Object.assign(defaultList, input)
         

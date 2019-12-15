@@ -2,7 +2,15 @@ import styled from 'styled-components'
 
 export const BlogDetailContainer = styled.div`
     position: absolute;
-    width: 100%;
+    min-width: 100%;
     background: whitesmoke;
-    margin-top: 10vh;
+    min-height: 100%;
+    padding-top: 10%;
+    @media (max-width: 650px){
+        padding-top: 20%;
+    }
+`
+
+export const BlogTitle = styled.h1`
+    position: relative;
 `
