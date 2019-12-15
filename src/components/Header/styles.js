@@ -1,15 +1,17 @@
 import styled from "styled-components";
-import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+import { Link as MenuLink } from 'react-router-dom'
 //Yes this is an experiment
 
-export const HeaderContainer = styled(Container)`
-  margin-right: 0;
-  margin-left: 0;
-  background: black;
+export const HeaderContainer = styled(Navbar)`
+ 
+  background: black !important;
   width: 100%;
+  text-decoration: none;
+  position: fixed;
+  z-index: 999;
 `;
 
 export const Logo = styled.div`
@@ -17,23 +19,37 @@ export const Logo = styled.div`
   width: 10vh;
 `;
 
-export const HeaderRow = styled(Row)`
-  height: 10vh;
-`;
-
 export const HeaderSingUp = styled(Button)`
   position: relative;
-  top: 50%;
-  transform: translate(0%, -50%);
-`;
-export const MenuItems = styled.div`
-  color: #cac9c9;
-  position: relative;
-  top: 50%;
-  transform: translate(0%, -50%);
-  cursor: pointer;
-
-  &:hover {
-    color: #949494;
+  margin-right: 5%;
+  @media (max-width: 768px){
+    position: fixed;
+    right: 20px;
+    top: 90%;
+    z-index: 999;
   }
 `;
+export const MenuItems = styled(Nav.Link)`
+  margin: 0px 5vw 0px 5vw;
+  cursor: pointer;
+  position: relative;
+  text-decoration: none;
+  color: gray !important;
+  &:hover {
+    color: #959494 !important;
+    text-decoration: none;
+  }
+`;
+
+export const Link = styled(MenuLink)`
+  color: gray !important;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+`;
+
+export const NavbarIcon = styled(Navbar.Toggle)`
+    background: white;
+` 

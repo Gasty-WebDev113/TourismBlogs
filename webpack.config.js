@@ -36,11 +36,17 @@ module.exports = {
     ]
   },
 
+  devServer: {
+    contentBase: path.join(__dirname, 'public'),
+    historyApiFallback: true
+  },
+
   plugins: [
     new HtmlWebpackPlugin({
+      
       title: "plugins",
       template: path.resolve(__dirname, "public/index.html"),
-      favicon: path.resolve(__dirname, "public/favicon.ico")
+      favicon: path.resolve(__dirname, "public/plane_favicon.ico")
     })
   ]
 };
