@@ -1,35 +1,17 @@
 import React from 'react'
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
 import {BlogPreveiw, PreviewImage, BlogTitle, Hashtag, HashtagContainer,PreviewDescription,BlogFooter } from './styles' 
-import { IconsContainer, BookMarks, SavedBookMarks } from '../../constants/icons'
+import { IconsContainer } from '../../constants/icons'
 import  {useLikeAction} from '../../hooks/useLikeAction'
-import {GET_BLOGS, BOOKMARKS_CHANGE_TRUE, BOOKMARKS_CHANGE_FALSE} from '../../constants/gqltags'
+import {useBookmarksAction} from '../../hooks/useBookmarksAction'
+import {GET_BLOGS} from '../../constants/gqltags'
 
 export const BlogComponent = ({ _id, Title, Photo, Likes, Bookmarks, Content, Liked }) =>{
     const BlogId = _id
     const Content_sliced = Content.slice(0, 255) + "..."
     const Like = useLikeAction(BlogId, Liked, Likes)
-
+    const BookMarks = useBookmarksAction(BlogId, Bookmarks)
     const { error, data } = useQuery(GET_BLOGS);
- 
-    //Bookmarks
-
-    const [BookMarkTrue, {loading : booktrueloading}] = useMutation(BOOKMARKS_CHANGE_TRUE, { 
-        variables: { _id: BlogId },
-        awaitRefetchQueries: true,
-        refetchQueries: [{ query: GET_BLOGS }]
-    })
-
-    const [BookMarkFalse, {loading : bookfalseloading}] = useMutation(BOOKMARKS_CHANGE_FALSE, { 
-        variables: { _id: BlogId },
-        awaitRefetchQueries: true,
-        refetchQueries: [{ query: GET_BLOGS }]
-    })
-
-    const BookmarksChange = () =>{
-        bookfalseloading | booktrueloading ? console.log("Cargando....") : (Bookmarks ? BookMarkFalse() : BookMarkTrue())
-        console.log(Bookmarks)
-    }
 
 return(
 
@@ -40,7 +22,7 @@ return(
         {Content_sliced}
         </PreviewDescription>
         <IconsContainer >
-            { Bookmarks ? <BookMarks onClick={() => BookmarksChange() }/> : <SavedBookMarks onClick={() => BookmarksChange()} />}
+            {BookMarks}
             {Like}
         </IconsContainer>
                     

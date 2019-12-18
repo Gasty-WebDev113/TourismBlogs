@@ -8,7 +8,7 @@ type Blogs{
     Bookmarks: Boolean!,
     Likes: Int,
     Liked: Boolean,
-    userID: ID,
+    Author: ID!,
 }
 
 
@@ -75,8 +75,8 @@ type Mutation{
     "Manejador de Like / Like Manager"
     addLike (_id: ID!): Blogs
 
-    "Agregar Bookmarks / Add Bookmarks"
-    setBookmarks (_id: ID!): Blogs
+    "Manejador de Bookmarks / Like Bookmarks"
+    bookmarks (_id: ID!): Blogs
 
     "Quitar Bookmarks / Remove Bookmarks | En el futuro removere esta mutacion y mejorare la de agregar "
     removeBookmarks (_id: ID!): Blogs

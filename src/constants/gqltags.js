@@ -38,6 +38,15 @@ export const LIKE_QUERY = gql`
             }
         }
     `;
+
+export const BOOKMARKS_CHANGE = gql`
+    mutation bookmarks($_id: ID!) {
+        bookmarks(_id: $_id){
+                Bookmarks
+            }
+        }
+    `;
+
 export const  GET_USER_INFO = gql`
                 {
                 getUserInfo{

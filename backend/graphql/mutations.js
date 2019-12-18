@@ -4,6 +4,7 @@ const { ObjectID } = require('mongodb')
 const {login} = require('./usermutations/login')
 const {register} = require('./usermutations/register')
 const {addlike} = require('./usermutations/addlike')
+const {bookmarks} = require('./usermutations/addbookmarks')
 
 module.exports = {
 
@@ -37,36 +38,6 @@ module.exports = {
 
     addLike: async (parent, {_id}, context) =>{await addlike(context, _id)},
 
-    setBookmarks: async (root,{_id}, context) =>{
-        let DataBase
-        let Bookmarks
-        try {
-            DataBase = await MongoConection() //"The patience makes the sage"
-            await DataBase.collection('Blogs').updateOne(
-                {_id: ObjectID(_id) }, {$set: {'Bookmarks': true } 
-            })
-            Bookmarks = await DataBase.collection('Blogs').findOne({_id: ObjectID(_id)}, {Bookmarks})
-       } catch (error) {
-            console.error(error)
-        }
-        return Bookmarks
-            
-    },
-
-    removeBookmarks: async (root,{_id}, context) =>{
-        let DataBase
-        let Bookmarks
-        try {
-            DataBase = await MongoConection() //"The patience makes the sage"
-            await DataBase.collection('Blogs').updateOne(
-                {_id: ObjectID(_id) }, {$set: {'Bookmarks': false } 
-            })
-            Bookmarks = await DataBase.collection('Blogs').findOne({_id: ObjectID(_id)}, {Bookmarks})
-       } catch (error) {
-            console.error(error)
-        }
-        return Bookmarks
-            
-    }
+    bookmarks: async(parent, {_id}, context) =>{await bookmarks(context, _id)},
 
 }

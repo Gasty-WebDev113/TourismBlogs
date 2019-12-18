@@ -14,7 +14,9 @@ module.exports = {
                 blogs = DataBase.collection('Blogs').find().toArray()
                 
                 for(let blog of Object.values(await blogs)){
-                    blog.Liked = false}
+                    blog.Liked = false;
+                    blog.Bookmarks = false
+                }
 
            } catch (error) {
                 console.error(error)
@@ -25,14 +27,19 @@ module.exports = {
             DataBase = await MongoConection()
             const userAuth = checkUserLogged(context.auth)
 
-            const userLikedList = await DataBase.collection('Users').findOne({_id: ObjectID(userAuth)})
+            const user = await DataBase.collection('Users').findOne({_id: ObjectID(userAuth)})
             
             blogs = DataBase.collection('Blogs').find().toArray()
 
-            const BlogList = userLikedList.LikedBlog
+            const BlogList = user.LikedBlog
+            const BookmarksList = user.BookmarksList
+
             for await (let blog of Object.values(await blogs)){ //This filter the id of the list with the blogs ids and set the liked
-                let Bloglistverify = BlogList.includes(blog._id.toString())
-                await Bloglistverify ? blog.Liked = true : blog.Liked = false  
+                let BlogLikeListVerify = BlogList.includes(blog._id.toString())
+                let BlogBookmarksverify = BookmarksList.includes(blog._id.toString())
+
+                await BlogLikeListVerify ? blog.Liked = true : blog.Liked = false;
+                await BlogBookmarksverify ? blog.Bookmarks = true : blog.Bookmarks = false;  
             }
          return blogs
         }},
