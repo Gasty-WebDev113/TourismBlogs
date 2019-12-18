@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {InfoContainer, UsernameTitle, UserPhoto, UserPhotoAlternative, UserInfoContainer, Changer, Activity, ButtonMode, Blogs} from './styles'
+import {InfoContainer, Title, Description, UserPhoto, UserPhotoAlternative, UserInfoContainer, Changer, Activity, ButtonMode, Blogs} from './styles'
 import { useQuery } from '@apollo/react-hooks';
 import {GET_USER} from '../../constants/gqltags'
 import {Loader} from '../Loader'
@@ -20,9 +20,10 @@ export const UserInfo = ({username}) => {
                 <UserPhoto>
                     <UserPhotoAlternative>{username.slice(0,1).toUpperCase()}</UserPhotoAlternative>
                 </UserPhoto>
-                <UsernameTitle>{Username}</UsernameTitle>
-                <UsernameTitle>{Email}</UsernameTitle>
-                <UsernameTitle>{FullName}</UsernameTitle> 
+                <Title>{Username}</Title>
+                <Title>{Email}</Title>
+                <Title>{FullName}</Title> 
+                <Description>{}</Description>
             </UserInfoContainer>   
 
             <Changer>

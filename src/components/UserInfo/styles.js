@@ -51,7 +51,7 @@ export const UserPhotoAlternative = styled.h1`
   margin-top: 5vh;
 `;
 
-export const UsernameTitle = styled.h1`
+export const Title = styled.h1`
   position: relative;
   text-align: center;
   font-size: 2vw;
@@ -63,6 +63,20 @@ export const UsernameTitle = styled.h1`
     font-size: 4vw;
     }
 `
+
+export const Description = styled.p`
+  position: relative;
+  text-align: center;
+  font-size: 1vw;
+
+  @media (max-width: 1225px){
+    font-size: 2vw;
+    }
+  @media (max-width: 426px){
+    font-size: 3vw;
+    }
+`
+
 
 export const Changer = styled.div`
     width: 25vw;
@@ -89,7 +103,7 @@ export const Activity = styled.div`
     /*Sorry, I could't solve in another shape*/
     color: ${props => props.lettercolors ? 'white' : 'orange' };
     cursor: pointer;
-    z-index: 999;
+    z-index: 1;
 
     @media (max-width: 768px){
         font-weight: 2vw
@@ -111,6 +125,16 @@ export const ButtonMode = styled.div`
     border-radius: 28px;
     transform: translateX(${props => props.movement ? '-1.5vw' : '19vw' });
     transition-duration: 0.25s;
+
+    @media (max-width: 2560px){
+      width: 10vw;
+      transform: translateX(${props => props.movement ? '-3vw' : '19vw' });
+    }
+
+    @media (max-width: 1440px){
+      width: 10vw;
+      transform: translateX(${props => props.movement ? '-3vw' : '19vw' });
+    }
 
     @media (max-width: 768px){
       width: 10vw;
