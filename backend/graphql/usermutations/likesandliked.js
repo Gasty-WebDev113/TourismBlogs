@@ -8,7 +8,9 @@ module.exports = {
             let DataBase = await MongoConection()
             let User = await DataBase.collection('Users').updateOne(
                 {_id: ObjectID(userid)},
-                {$pull: {'LikedBlog': Blogid }},
+                {$pull: {'LikedBlog':{
+                    BlogLikedID: Blogid
+                }  }},
             )
             
         } catch (error) {
@@ -21,7 +23,10 @@ module.exports = {
             let DataBase = await MongoConection()
             let User = await DataBase.collection('Users').updateOne(
                 {_id: ObjectID(userid)},
-                {$push: {'LikedBlog': Blogid }},
+                {$push: {'LikedBlog': {
+                    BlogLikedID: Blogid,
+                    LikedDate: new Date()
+                } }, },
             )
             
         } catch (error) {

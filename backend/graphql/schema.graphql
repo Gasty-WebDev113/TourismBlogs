@@ -51,6 +51,9 @@ input NewUser{
 type Query{
     "Mira todos los Blogs / See all the blogs"
     getBlogs:[Blogs]
+
+    "Mira Blogs marcados / See marked blogs"
+    getBookmarks:[Blogs]
     
     "Mira un Blog / See a blog"
     getBlog (_id: ID!): Blogs
