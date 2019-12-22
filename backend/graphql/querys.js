@@ -63,7 +63,7 @@ module.exports = {
          return Bookmarks
     },
 
-    getBlog: async (root, { _id }) =>{
+    getBlog: async (parent, {_id}, context) =>{
         let DataBase
         let blog
         try {

@@ -5,10 +5,10 @@ import { LoginForm } from '../components/LoginForm'
 export default class LoginAndSing extends Component {
     render() {
         return (
-            <div>
+            <>
                 <LoginForm/>
                 <LoginImage/>
-            </div>
+            </>
         )
     }
 }

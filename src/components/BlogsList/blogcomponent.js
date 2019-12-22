@@ -6,7 +6,7 @@ import  {useLikeAction} from '../../hooks/useLikeAction'
 import {useBookmarksAction} from '../../hooks/useBookmarksAction'
 import {GET_BLOGS} from '../../constants/gqltags'
 
-export const BlogComponent = ({ _id, Title, Photo, Likes, Bookmarks, Content, Liked }) =>{
+export const BlogsListComponent = ({ _id, Title, Photo, Likes, Bookmarks, Content, Liked }) =>{
     const BlogId = _id
     const Content_sliced = Content.slice(0, 255) + "..."
     const Like = useLikeAction(BlogId, Liked, Likes)
@@ -14,7 +14,6 @@ export const BlogComponent = ({ _id, Title, Photo, Likes, Bookmarks, Content, Li
     const { error, data } = useQuery(GET_BLOGS);
 
 return(
-
     <BlogPreveiw>
         <PreviewImage></PreviewImage>
         <BlogTitle to={`/blogs/${_id}`}>{Title}</BlogTitle>
@@ -35,6 +34,5 @@ return(
             </HashtagContainer>
         </BlogFooter>
     </BlogPreveiw>
-)
-}
+)}
 

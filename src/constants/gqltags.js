@@ -1,22 +1,6 @@
 
 import gql from 'graphql-tag';
 
-export const BOOKMARKS_CHANGE_TRUE = gql`
-        mutation setBookmarks($_id: ID!) {
-            setBookmarks(_id: $_id){
-                Bookmarks
-                }
-            }
-    `
-
-export const BOOKMARKS_CHANGE_FALSE = gql`
-        mutation removeBookmarks($_id: ID!) {
-            removeBookmarks(_id: $_id){
-                Bookmarks
-                }
-            }
-    `
-
 export const  GET_BLOGS = gql`
             {
             getBlogs{
@@ -25,6 +9,19 @@ export const  GET_BLOGS = gql`
                 Photo
                 Likes
                 Bookmarks
+                Content
+                Liked
+                    }
+            }
+    `;
+
+export const  GET_BOOKMARKS = gql`
+            {
+            getBlogs{
+                _id
+                Title
+                Photo
+                Likes
                 Content
                 Liked
                     }
@@ -60,7 +57,10 @@ export const  GET_USER = gql`
                 getUser(Username: $Username){
                     Username
                     Email
-                    LikedBlog
+                    LikedBlog{
+                        BlogLikedID
+                        LikedDate
+                    }
                     BookmarksList
                     FullName
                 }

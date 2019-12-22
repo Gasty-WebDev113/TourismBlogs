@@ -5,13 +5,13 @@ export const InfoContainer = styled.div`
     min-width: 100%;
     background: whitesmoke;
     min-height: 100%;
-    padding-top: 10%;
+    padding-top: 8%;
     @media (max-width: 650px){
         padding-top: 20%;
     }
 `
 export const UserInfoContainer = styled.div`
-  position: absolute;
+  position: fixed;
   min-width: 40vw;
   background: -webkit-linear-gradient(top, rgba(158,158,158,1) 0%, rgba(245,245,245,1) 100%);
   min-height: 70%;
@@ -81,12 +81,21 @@ export const Description = styled.p`
 export const Changer = styled.div`
     width: 25vw;
     height: 5vh;
-    margin-top: 5vh;
     margin-bottom: 3vh;
-    right: 15vw;
     position: absolute;
-    @media (max-width: 768px){
+    align-items: center;
+    @media (min-width: 769px){
+      right: 15vw;
       width: 25vw;
+    }
+
+    @media (max-width: 768px){
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-top: 5vh;
+      z-index: 1;
+
     }
     @media (max-width: 426px){
       width: 35vw;
@@ -115,6 +124,22 @@ export const Activity = styled.div`
 
 export const Blogs = styled(Activity)`
     float: right;
+`
+
+export const BlogsLikedDate = styled.p`
+  text-align: center;
+`
+
+export const BlogsActivityContainer = styled.div`
+    position:relative;
+    height: 100%;
+    width: 60%;
+    float: right;
+    padding-top: 8vh;
+
+    @media (max-width: 768px){
+      width: 100%;
+    }
 `
 
 export const ButtonMode = styled.div`

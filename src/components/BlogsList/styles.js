@@ -4,12 +4,20 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import {Link} from 'react-router-dom'
 
 export const Container = styled.div`
-    position: absolute;
+    position: relative;
     width: 100%;
-    background: whitesmoke;
-    margin-top: 10vh;
+    height: 100%;
+    padding-top: 5vw;
+    display: inline-block;
+    @media (max-width: 768px){
+        padding-top: 10vw;
+    }
+    @media (min-width: 320px) and (max-width: 767px){
+        padding-top: 25vw;
+    }
 `
 export const BlogPreveiw = styled.div`
+    
     position: relative;
     height: 30vh;
     width: 60%;

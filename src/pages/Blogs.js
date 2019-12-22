@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-import {BlogsPage} from '../components/BlogsPage'
-
+import {BlogsList} from '../components/BlogsList'
+import {GET_BLOGS} from '../constants/gqltags'
 
 export default class Blogs extends Component {
     render() {
         return (
-            <BlogsPage />
+            <div style={{background: "whitesmoke"}}>
+                <BlogsList query={GET_BLOGS} />
+            </div>
         )
     }
 }
