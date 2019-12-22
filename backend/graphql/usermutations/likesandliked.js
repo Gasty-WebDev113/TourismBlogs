@@ -19,13 +19,14 @@ module.exports = {
     },
 
     addBlogLiked: async ({ userid, Blogid }) => {
+        let today = new Date().toISOString() //Temporal Solution, sorry
         try {
             let DataBase = await MongoConection()
             let User = await DataBase.collection('Users').updateOne(
                 {_id: ObjectID(userid)},
-                {$push: {'LikedBlog': {
+                {$push: {'LikedBlog': { //This creates the like and the activity
                     BlogLikedID: Blogid,
-                    LikedDate: new Date()
+                    LikedDate: today
                 } }, },
             )
             
@@ -42,7 +43,7 @@ module.exports = {
             DataBase = await MongoConection() //"The patience makes the sage"
             await DataBase.collection('Blogs').updateOne(
                 {_id: ObjectID(BlogId) },
-                 
+                //Search ID and set the liked and increment the like
                 {$set: {'Liked': true}, $inc: {'Likes': 1 }}, //$inc Increment in 1 the Likes
             )
             NewLike = await DataBase.collection('Blogs').findOne({_id: ObjectID(BlogId)})

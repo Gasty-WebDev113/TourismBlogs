@@ -43,15 +43,17 @@ module.exports = {
                 await BlogLikeListVerify ? blog.Liked = true : blog.Liked = false;
                 await BlogBookmarksverify ? blog.Bookmarks = true : blog.Bookmarks = false;  
             }
-         return blogs
+         return blogs   
         }},
     getBookmarks: async (parent, args, context) => {
         let DataBase
         let Bookmarks = [] //This will contain the blogs information
         
         const userAuth = checkUserLogged(context.auth)
+        
         const user = await DataBase.collection('Users').findOne({_id: ObjectID(userAuth)})
-        const BlogList = DataBase.collection('Blogs').find().toArray()
+        console.log(userAuth)
+        const BlogList = await DataBase.collection('Blogs').find().toArray()
         const BookmarksList = user.BookmarksList
         
         for await (let blog of Object.values(await BlogList)){ //This filter the id of the list with the blogs ids and set the liked
@@ -78,7 +80,6 @@ module.exports = {
         const userAuth = checkUserLogged(context.auth)
 
         const UserInfo = await DataBase.collection('Users').findOne({_id: ObjectID(userAuth)})
-        console.log(UserInfo)
         return UserInfo
     },    
 
@@ -87,7 +88,7 @@ module.exports = {
         let DataBase = await MongoConection()
 
         const Info = await DataBase.collection('Users').findOne({'Username': `${Username}`})
-        console.log(Info)
+        
         return Info
     },
 }

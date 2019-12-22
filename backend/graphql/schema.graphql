@@ -18,8 +18,13 @@ type User{
     Email: String!,
     Username: String!,
     FullName: String!,
-    LikedBlog: [String],
+    LikedBlog: [Like],
     BookmarksList: [String],
+}
+
+type Like {
+    BlogLikedID: String,
+    LikedDate: String,
 }
 
 type Response{
