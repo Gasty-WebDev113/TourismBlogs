@@ -1,13 +1,13 @@
 import React, {Fragment} from 'react'
 import { useQuery } from '@apollo/react-hooks';
-import {GET_BOOKMARKS, GET_USER} from '../constants/gqltags'
+import {GET_BLOGS, GET_USER} from '../constants/gqltags'
 import {BlogsActivityContainer, BlogsLikedDate} from '../components/UserInfo/styles'
 import {BlogsListComponent} from '../components/BlogsList/blogcomponent'
 
 import Moment from 'react-moment';
 
 export function useLikedDate(username){
-    const {data: blogdata, loading: loadingblogdata, error: errorblogdata} = useQuery(GET_BOOKMARKS)
+    const {data: blogdata, loading: loadingblogdata, error: errorblogdata} = useQuery(GET_BLOGS)
 
     const {loading, error, data} = useQuery(GET_USER,{
         variables: {Username: username}

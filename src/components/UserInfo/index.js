@@ -40,9 +40,7 @@ export const UserInfo = ({username}) => {
             
                 {
                     list
-                }
-            
-                
+                }       
         </InfoContainer>
     )}else{
         return <Loader />

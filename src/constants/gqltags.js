@@ -15,18 +15,7 @@ export const  GET_BLOGS = gql`
             }
     `;
 
-export const  GET_BOOKMARKS = gql`
-            {
-            getBlogs{
-                _id
-                Title
-                Photo
-                Likes
-                Content
-                Liked
-                    }
-            }
-    `;
+
 
 export const LIKE_QUERY = gql`
     mutation addLike($_id: ID!) {
