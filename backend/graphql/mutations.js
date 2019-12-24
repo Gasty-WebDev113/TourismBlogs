@@ -40,4 +40,4 @@ module.exports = {
 
     bookmarks: async(parent, {_id}, context) =>{await bookmarks(context, _id)},
 
-}
+} 

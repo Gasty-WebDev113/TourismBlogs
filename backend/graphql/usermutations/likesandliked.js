@@ -19,7 +19,7 @@ module.exports = {
     },
 
     addBlogLiked: async ({ userid, Blogid }) => {
-        let today = new Date().toISOString() //Temporal Solution, sorry
+        let today = new Date().toISOString() //Temporal Solution
         try {
             let DataBase = await MongoConection()
             let User = await DataBase.collection('Users').updateOne(

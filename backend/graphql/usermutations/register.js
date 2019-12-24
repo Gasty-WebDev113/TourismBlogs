@@ -10,13 +10,12 @@ module.exports = {
             throw new Error("El nombre de usuario es obligatorio")
         }
         
-        const defaultList = {
+        const defaultList = { //The new user doesn't have this values 
             LikedBlog: [],
             BookmarksList: [],
             Name: ''
         }
-        const NewUser = Object.assign(defaultList, input)
-        
+        const NewUser = Object.assign(defaultList, input)     
         let DataBase
         let User 
         
