@@ -8,7 +8,6 @@ module.exports = {
         let DataBase
         let blogs = [] //This will contain the blogs information
         if(context.auth === "nothing" || context.auth === null){ //If you are not logged
-            console.log("Forma no loggueada funcionando")
             try {
                 DataBase = await MongoConection() //"The patience makes the sage"
                 blogs = DataBase.collection('Blogs').find().toArray()
@@ -34,8 +33,6 @@ module.exports = {
             user.LikedBlog.map(Blog => BlogLikedList.push(Blog.BlogLikedID))
             const BookmarksList = user.BookmarksList
 
-            console.log(BlogLikedList)
-
             for await (let blog of Object.values(await blogs)){ //This filter the id of the list with the blogs ids and set the liked
                 let BlogLikeListVerify = BlogLikedList.includes(blog._id.toString())
                 let BlogBookmarksverify = BookmarksList.includes(blog._id.toString())
@@ -48,11 +45,9 @@ module.exports = {
     getBookmarks: async (parent, args, context) => {
         let DataBase
         let Bookmarks = [] //This will contain the blogs information
-        
         const userAuth = checkUserLogged(context.auth)
         
         const user = await DataBase.collection('Users').findOne({_id: ObjectID(userAuth)})
-        console.log(userAuth)
         const BlogList = await DataBase.collection('Blogs').find().toArray()
         const BookmarksList = user.BookmarksList
         
