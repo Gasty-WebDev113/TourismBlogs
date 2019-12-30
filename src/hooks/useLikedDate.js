@@ -49,6 +49,6 @@ export function useLikedDate(username){
                                 </Fragment>)
                                 })
                 }        
-            </BlogsActivityContainer>
+        </BlogsActivityContainer>
     )
 }} 

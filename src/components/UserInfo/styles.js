@@ -10,19 +10,18 @@ export const InfoContainer = styled.div`
     @media (max-width: 650px){
         padding-top: 20%;
     }
+    
 `
 export const UserInfoContainer = styled.div`
   position: fixed;
-  min-width: 40vw;
+  width: 40%;
   background: -webkit-linear-gradient(top, rgba(158,158,158,1) 0%, rgba(245,245,245,1) 100%);
   min-height: 70%;
   margin-left: 5vw;
-  @media (min-width: 1090px){
-    min-width: 30%;
-    }
   @media (max-width: 768px){
     margin-top: 5vh;
     }
+  z-index: 1
 `
 
 export const UserPhoto = styled.div`
@@ -61,11 +60,12 @@ export const TitleContainer = styled.div`
 export const Title = styled.h1`
   position: relative;
   text-align: center;
-  font-size: 2vw;
+  font-size: 1.5vw;
   cursor: default;
+  word-break: break-word;
 
   @media (max-width: 1225px){
-    font-size: 3vw;
+    font-size: 2vw;
     }
   @media (max-width: 426px){
     font-size: 4vw;
@@ -78,16 +78,18 @@ export const Edit = styled(TiPencil)`
   width: 5vw;
   left: 50%;
   transform: translateX(-50%);
-  margin-bottom: 10px;
+  margin-top: 20px;
   &:hover{
    fill: blue
   }
+  
 `
 
-export const Description = styled.p`
+export const DescriptionTextContainer = styled.div`
   position: relative;
   text-align: center;
-  font-size: 1vw;
+  display: block;
+  word-break: break-word;
 
   @media (max-width: 1225px){
     font-size: 2vw;
@@ -106,7 +108,7 @@ export const BlogsActivityContainer = styled.div`
     height: 100%;
     width: 60%;
     float: right;
-    padding-top: 8vh;
+    margin-top: 8vh;
 
     @media (max-width: 768px){
       width: 100%;

@@ -16,7 +16,6 @@ export const Changer = styled.div`
       left: 50%;
       transform: translateX(-50%);
       margin-top: 5vh;
-      z-index: 1;
 
     }
     @media (max-width: 426px){
@@ -34,7 +33,6 @@ export const Activity = styled.div`
     /*Sorry, I could't solve in another shape*/
     color: ${props => props.lettercolors ? 'white' : 'black' };
     cursor: pointer;
-    z-index: 1;
 
     @media (max-width: 768px){
         font-weight: 2vw

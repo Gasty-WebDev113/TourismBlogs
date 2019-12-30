@@ -5,12 +5,15 @@ const {login} = require('./usermutations/login')
 const {register} = require('./usermutations/register')
 const {addlike} = require('./usermutations/addlike')
 const {bookmarks} = require('./usermutations/addbookmarks')
+const {edituser} = require('./usermutations/edituser')
 
 module.exports = {
 
-    loginUser: async (root, {email, password})=> await login({email ,password}),
+    loginUser: async (parent, {email, password})=> await login({email ,password}),
 
-    createUser: async (root, {input})=> await register({input}),
+    createUser: async (parent, {input})=> await register({input}),
+
+    editUser: async (parent, {input}, context)=> await edituser({input}, context),
 
     createBlog: async (root, {input})=>{
 

@@ -52,17 +52,26 @@ export const  GET_USER = gql`
                     }
                     BookmarksList
                     FullName
+                    Description
                 }
             }
         `;
 
-export const REGISTER_MUTATION = gql`
-        mutation createUser($input: NewUser!) {
-                createUser(input: $input){
-                    token
+export const EDIT_USER_MUTATION = gql`
+        mutation editUser($input: EditUser!) {
+            editUser(input: $input){
+                    success
               }
             }
     `;
+
+export const REGISTER_MUTATION = gql`
+mutation createUser($input: NewUser!) {
+        createUser(input: $input){
+            token
+      }
+    }
+`;
 
 export const LOGIN_MUTATION = gql`
         mutation loginUser($email: String!, $password: String!) {
