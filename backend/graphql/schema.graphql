@@ -11,6 +11,11 @@ type Blogs{
     Author: ID!,
 }
 
+type File {
+    filename: String!
+    mimetype: String!
+    encoding: String!
+}
 
 type User{
     _id: ID!,
@@ -21,6 +26,7 @@ type User{
     LikedBlog: [Like],
     BookmarksList: [String],
     Description: String,
+    FotoPerfil: Upload
 }
 
 type Like {
@@ -79,6 +85,10 @@ type Query{
 }
 
 type Mutation{
+
+    "Subir imagen"
+    singleUpload(file: Upload!): File!
+
     "Crear Usuario / Create User"
     createUser(input: NewUser!): Response
 

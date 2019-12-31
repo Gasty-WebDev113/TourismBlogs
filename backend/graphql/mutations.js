@@ -1,5 +1,5 @@
 const MongoConection = require('../db/db')
-const { ObjectID } = require('mongodb')
+const { ObjectID, GridFSBucket } = require('mongodb')
 //User functions
 const {login} = require('./usermutations/login')
 const {register} = require('./usermutations/register')
@@ -37,6 +37,21 @@ module.exports = {
         }   
 
         return NewBlog //Send to GraphQL the information 
+    },
+
+    singleUpload: async(parent, {file}) => {
+        const { stream, filename, mimetype, encoding } = await file
+        const bucket = new GridFSBucket(process.env.DB_CONECTION);
+        const uploadStream = bucket.openUploadStream(filename, {
+            contentType: mimetype
+        });
+        await new Promise((resolve, reject) => {
+            stream
+            .pipe(uploadStream)
+            .on("error", reject)
+            .on("finish", resolve);
+        });
+        return { _id: uploadStream.id, filename, mimetype, encoding }
     },
 
     addLike: async (parent, {_id}, context) =>{await addlike(context, _id)},
