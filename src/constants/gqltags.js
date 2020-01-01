@@ -53,6 +53,7 @@ export const  GET_USER = gql`
                     BookmarksList
                     FullName
                     Description
+                    ProfilePhoto
                 }
             }
         `;
@@ -64,6 +65,16 @@ export const EDIT_USER_MUTATION = gql`
               }
             }
     `;
+
+export const UPLOAD_PROFILE_PHOTO = gql`
+mutation ProfileImageUpload($file: Upload!) {
+  profileImageUpload(file: $file) {
+    filename
+    mimetype
+    encoding
+  }
+}
+`;
 
 export const REGISTER_MUTATION = gql`
 mutation createUser($input: NewUser!) {

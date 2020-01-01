@@ -8,8 +8,6 @@ const Provider = ({children}) => { //Change the provider to make changes the Aut
         return window.sessionStorage.getItem('token') //If you have the token, this set true
     })
 
- 
-
     const value = {
         Auth,
         setAuth: (token) =>{

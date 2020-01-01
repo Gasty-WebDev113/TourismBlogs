@@ -10,12 +10,12 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import Context from './Context'
 import { ApolloLink, concat } from "apollo-link";
 
-const token = window.sessionStorage.getItem('token')
 const apolloCache = new InMemoryCache()
-const uploadlink =  new createUploadLink({uri: 'http://localhost:4000'});
+const uploadlink =  new createUploadLink({uri: 'http://localhost:4000/api'});
 
 const operationmiddleware = new ApolloLink((operation, forward) => {//This execute before of any request
-        operation.setContext({
+    const token = window.sessionStorage.getItem('token')
+    operation.setContext({
             headers: {
                 authorization: token ? `Bearer ${token}` : ''
             }
@@ -25,9 +25,7 @@ const operationmiddleware = new ApolloLink((operation, forward) => {//This execu
 
 const clientconect = new ApolloClient({
     cache: apolloCache,
-    link: concat(operationmiddleware, uploadlink)
-    
-    
+    link: concat(operationmiddleware, uploadlink) //Concat the uri and the request 
 })
 
 ReactDOM.render(

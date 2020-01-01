@@ -4,6 +4,9 @@ import { IoIosHeartEmpty } from "react-icons/io";
 import { IoIosHeart } from "react-icons/io";
 import { MdBookmarkBorder } from "react-icons/md"; 
 import { MdBookmark } from "react-icons/md"; 
+import { MdAddAPhoto } from "react-icons/md";
+
+import {Loader} from '../components/Loader'
 
 export const IconsContainer = styled.div`
     position: absolute;
@@ -52,3 +55,21 @@ export const LikeNumber = styled.h1`
   float: right;
 `;
 
+export const Photo = styled(MdAddAPhoto)`
+  color: white;
+  height: 5vh;
+  width: 5vw;
+  position: absolute;
+  z-index: 1;
+  cursor: pointer;
+  &:hover{
+    color: yellow;
+  }
+`
+
+export const SelectedPhoto = styled(Photo)`
+  color: yellow;
+`
+export const UploadLoader = styled(Loader)`
+  position: absolute;
+`

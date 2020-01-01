@@ -6,6 +6,7 @@ import { useQuery } from '@apollo/react-hooks';
 import {GET_USER} from '../../constants/gqltags'
 import {Loader} from '../Loader'    
 import {useLikedDate} from '../../hooks/useLikedDate'
+import {useUploadImage} from '../../hooks/useUploadImage'
 import Context from '../../Context';
 import {EditProfileComponent} from '../EditProfile'
 
@@ -14,12 +15,13 @@ export const UserInfo = ({username}) => {
     const [mode, setMode] = useState(true) //Activity or Blogs
     const [editmode, setEdit] = useState(false) //Edit Mode
     const list = useLikedDate(username)
+    const upload = useUploadImage()
 
     const {loading, error, data} = useQuery(GET_USER,{
         variables: {Username: username} //Get the user information
     })
     if(loading === false){
-    const { Username, Email, FullName, Description} = data.getUser
+    const { Username, Email, FullName, Description, ProfilePhoto} = data.getUser
 
     return(
         <InfoContainer>
@@ -30,8 +32,10 @@ export const UserInfo = ({username}) => {
                     return (
                     <UserInfoContainer>
                         {Auth ? (editmode ? <EditProfileComponent username={Username} email={Email} fullname={FullName} description={Description} />: <Edit onClick={() => setEdit(true)}/>) : null }
-                        <UserPhoto>
-                            <UserPhotoAlternative>{username.slice(0,1).toUpperCase()}</UserPhotoAlternative>
+                        <UserPhoto photo={`http://localhost:4000/images/${ProfilePhoto}`}>
+                            {
+                                upload
+                            } 
                         </UserPhoto>
                         <TitleContainer>
                             <Title>{Username}</Title>
@@ -55,7 +59,8 @@ export const UserInfo = ({username}) => {
                 </Changer>
                     {
                         mode === true ? list : null
-                    }    
+                    }
+                    
         </InfoContainer>
     )}else{
         return <Loader />
