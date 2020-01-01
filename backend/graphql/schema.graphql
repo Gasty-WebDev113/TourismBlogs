@@ -26,7 +26,7 @@ type User{
     LikedBlog: [Like],
     BookmarksList: [String],
     Description: String,
-    FotoPerfil: Upload
+    ProfilePhoto: String
 }
 
 type Like {
@@ -86,14 +86,14 @@ type Query{
 
 type Mutation{
 
-    "Subir imagen"
-    singleUpload(file: Upload!): File!
-
     "Crear Usuario / Create User"
     createUser(input: NewUser!): Response
 
     "Editar Usuario / Edit User"
     editUser(input: EditUser!): Response
+
+    "Subir imagen de perfil / Upload profile photo"
+    profileImageUpload(file: Upload!): File!
 
     "Loguearse / Login"
     loginUser( email: String! password: String! ): Response

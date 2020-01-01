@@ -1,5 +1,8 @@
 const MongoConection = require('../db/db')
-const { ObjectID, GridFSBucket } = require('mongodb')
+const { ObjectID } = require('mongodb')
+const mongodb = require('mongodb')
+const {checkUserLogged} = require('./usermutations/check')
+
 //User functions
 const {login} = require('./usermutations/login')
 const {register} = require('./usermutations/register')
@@ -39,11 +42,17 @@ module.exports = {
         return NewBlog //Send to GraphQL the information 
     },
 
-    singleUpload: async(parent, {file}) => {
-        const { stream, filename, mimetype, encoding } = await file
-        const bucket = new GridFSBucket(process.env.DB_CONECTION);
+    profileImageUpload: async(parent, {file}, context) => {
+        let DataBase = await MongoConection()
+        
+        //Get the User ID
+        const userAuth = checkUserLogged(context.auth)
+
+        const { createReadStream, filename, mimetype, encoding } = await file
+        const stream = createReadStream()
+        const bucket = new mongodb.GridFSBucket(DataBase);
         const uploadStream = bucket.openUploadStream(filename, {
-            contentType: mimetype
+            contentType: mimetype,
         });
         await new Promise((resolve, reject) => {
             stream
@@ -51,6 +60,14 @@ module.exports = {
             .on("error", reject)
             .on("finish", resolve);
         });
+
+        //Set the id of the image in the user file list
+        
+        let User = await DataBase.collection('Users').updateOne(
+            {_id: ObjectID(userAuth)},
+            {$set: {'ProfilePhoto': uploadStream.id } },
+        )
+
         return { _id: uploadStream.id, filename, mimetype, encoding }
     },
 

@@ -1,5 +1,6 @@
 const {MongoClient} = require('mongodb');
-
+var mongo = require('mongodb');
+var Grid = require('gridfs-stream');
 const mongodbUri = `${process.env.DB_CONECTION}` //FUCK YEAH EVERYBODY WORKS !!!!!!
 const DbName = `${process.env.DB_DATABASENAME}`
 let connection
