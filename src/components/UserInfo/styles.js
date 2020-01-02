@@ -25,7 +25,7 @@ export const UserInfoContainer = styled.div`
 `
 
 export const UserPhoto = styled.div`
-  background: ${props => `url(${props.photo}) no-repeat center`};
+  background: ${props => props.photo ? `url(${props.photo}) no-repeat center` : 'gray' };
   background-size: cover;
   height: 15vw;
   width: 15vw;
@@ -34,10 +34,11 @@ export const UserPhoto = styled.div`
   align-items: center;
   margin: 0 auto;
   margin-bottom: 5vh;
+  margin-top: 5vh;
   overflow: hidden;
 
   @media (min-width: 770px){
-    margin-top: 0;
+    margin-top: 5vh;
     }
 `;
 
@@ -81,7 +82,6 @@ export const Edit = styled(TiPencil)`
   left: 50%;
   transform: translateX(-50%);
   margin-top: 20px;
-  margin-bottom: 20px;
   &:hover{
    fill: blue
   }

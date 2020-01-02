@@ -10,7 +10,6 @@ export const UserLogged = () =>{
     function UserImage(){
         const {loading, error, data} = useQuery(GET_USER_INFO)
         if(loading) return "Loading"
-        console.log("Hello")
         const userprofile = data.getUserInfo.Username
         
         return(

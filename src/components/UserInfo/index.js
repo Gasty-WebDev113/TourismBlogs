@@ -21,7 +21,8 @@ export const UserInfo = ({username}) => {
         variables: {Username: username} //Get the user information
     })
     if(loading === false){
-    const { Username, Email, FullName, Description, ProfilePhoto} = data.getUser
+        
+    const { Username, Email, FullName, Description} = data.getUser
 
     return(
         <InfoContainer>
@@ -32,9 +33,9 @@ export const UserInfo = ({username}) => {
                     return (
                     <UserInfoContainer>
                         {Auth ? (editmode ? <EditProfileComponent username={Username} email={Email} fullname={FullName} description={Description} />: <Edit onClick={() => setEdit(true)}/>) : null }
-                        <UserPhoto photo={`http://localhost:4000/images/${ProfilePhoto}`}>
+                        <UserPhoto photo={data.getUser.ProfilePhoto !== '' ? `http://localhost:4000/images/${data.getUser.ProfilePhoto}`: null}>
                             {
-                                upload
+                                Auth ? upload : null
                             } 
                         </UserPhoto>
                         <TitleContainer>

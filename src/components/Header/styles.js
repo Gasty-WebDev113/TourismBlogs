@@ -67,8 +67,13 @@ export const UserPhoto = styled.div`
   width: 7vh;
   border-radius: 100%;
   cursor: pointer;
-  float: right
+  float: right;
+  overflow: hidden
 `;
+
+export const UserPhotoImg = styled.img`
+  height: 100%;
+`
 
 export const UserPhotoAlternative = styled.h1`
   height: 100%;

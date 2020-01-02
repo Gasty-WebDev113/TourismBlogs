@@ -13,7 +13,9 @@ module.exports = {
         const defaultList = { //The new user doesn't have this values 
             LikedBlog: [],
             BookmarksList: [],
-            Name: ''
+            FullName: '',
+            Description: '',
+            ProfilePhoto: '',
         }
         const NewUser = Object.assign(defaultList, input)     
         let DataBase

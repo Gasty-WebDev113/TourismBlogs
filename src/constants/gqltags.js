@@ -37,6 +37,7 @@ export const  GET_USER_INFO = gql`
                 {
                 getUserInfo{
                     Username
+                    ProfilePhoto
                     }
                 }
         `;

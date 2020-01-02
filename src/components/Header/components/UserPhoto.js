@@ -1,11 +1,14 @@
 import React from 'react';
-import { UserPhoto, UserPhotoAlternative} from '../styles'
+import { UserPhoto, UserPhotoAlternative, UserPhotoImg} from '../styles'
 
 export const UserPhotoImage = (data) =>{
     const name = data.getUserInfo.Username.slice(0,1).toUpperCase()
-    console.log(name)
     
     return (<UserPhoto>
-            <UserPhotoAlternative style={{color: "white"}}>{name}</UserPhotoAlternative>
+                {
+                  data.getUserInfo.ProfilePhoto !== ''
+                ? <UserPhotoImg src={`http://localhost:4000/images/${data.getUserInfo.ProfilePhoto}`} alt="profile" /> 
+                : <UserPhotoAlternative>{name}</UserPhotoAlternative> 
+                }
     </UserPhoto>)
 }

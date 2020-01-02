@@ -3,17 +3,7 @@ import {Photo, SelectedPhoto} from '../constants/icons'
 import { useMutation } from '@apollo/react-hooks'
 import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
-import gql from 'graphql-tag';
-
-const UPLOAD_PROFILE_PHOTO = gql`
-  mutation ProfileImageUpload($file: Upload!) {
-    profileImageUpload(file: $file) {
-      filename
-      mimetype
-      encoding
-    }
-  }
-`;
+import {UPLOAD_PROFILE_PHOTO} from '../constants/gqltags'
 
 export const useUploadImage = () => {
     const [profileImageUpload,{loading}] = useMutation(UPLOAD_PROFILE_PHOTO)
@@ -25,8 +15,6 @@ export const useUploadImage = () => {
         [profileImageUpload]
     )
     const { getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
-    
-    
     
     return(
             <div {...getRootProps()}>
