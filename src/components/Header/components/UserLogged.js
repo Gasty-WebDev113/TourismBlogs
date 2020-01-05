@@ -24,6 +24,8 @@ export const UserLogged = () =>{
            UserImage()
        }
        <Notifications />
-       <BookMarks />
+       <Link to='/bookmarks'>
+            <BookMarks />
+       </Link>
     </div>)
 }

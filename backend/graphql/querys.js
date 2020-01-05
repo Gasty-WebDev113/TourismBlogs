@@ -43,19 +43,21 @@ module.exports = {
          return blogs   
         }},
     getBookmarks: async (parent, args, context) => {
-        let DataBase
+        let DataBase = await MongoConection()
         let Bookmarks = [] //This will contain the blogs information
         const userAuth = checkUserLogged(context.auth)
-        
         const user = await DataBase.collection('Users').findOne({_id: ObjectID(userAuth)})
         const BlogList = await DataBase.collection('Blogs').find().toArray()
+        
         const BookmarksList = user.BookmarksList
         
-        for await (let blog of Object.values(await BlogList)){ //This filter the id of the list with the blogs ids and set the liked
+        for (let blog of Object.values(await BlogList)){ //This filter the id of the list with the blogs ids and set the liked
                 let BlogBookmarksverify = BookmarksList.includes(blog._id.toString())
                 if(BlogBookmarksverify) Bookmarks.push(blog) 
             }
-         return Bookmarks
+        
+
+        return Bookmarks
     },
 
     getBlog: async (parent, {_id}, context) =>{

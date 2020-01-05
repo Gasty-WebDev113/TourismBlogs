@@ -15,6 +15,20 @@ export const  GET_BLOGS = gql`
             }
     `;
 
+export const  GET_BOOKMARKS = gql`
+            {
+            getBookmarks{
+                _id
+                Title
+                Photo
+                Likes
+                Bookmarks
+                Content
+                Liked
+                    }
+            }
+    `;
+
 
 
 export const LIKE_QUERY = gql`

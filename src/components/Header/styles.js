@@ -72,6 +72,7 @@ export const UserPhoto = styled.div`
 `;
 
 export const UserPhotoImg = styled.img`
+  image-rendering: pixelated;
   height: 100%;
 `
 

@@ -7,7 +7,7 @@ export const UserPhotoImage = (data) =>{
     return (<UserPhoto>
                 {
                   data.getUserInfo.ProfilePhoto !== ''
-                ? <UserPhotoImg src={`http://localhost:4000/images/${data.getUserInfo.ProfilePhoto}`} alt="profile" /> 
+                ? <UserPhotoImg src={`http://localhost:4000/images/${data.getUserInfo.ProfilePhoto}`} alt="profile"/> 
                 : <UserPhotoAlternative>{name}</UserPhotoAlternative> 
                 }
     </UserPhoto>)
