@@ -18,12 +18,15 @@ module.exports = {
 
     editUser: async (parent, {input}, context)=> await edituser({input}, context),
 
-    createBlog: async (root, {input})=>{
+    createBlog: async (parent, {input}, {files}, context)=>{
+    
+        const userAuth = checkUserLogged(context.auth)
 
         const defaultvalues = {
             Bookmarks: false,
             Likes: 0,
             Liked: false,
+            Author: userAuth
         }
         const NewBlog = Object.assign(defaultvalues, input) //Join defaults and the information of the input
         let DataBase
@@ -38,7 +41,6 @@ module.exports = {
         } catch (error) {
             console.error("Fallo en la operacion | Faild operation", error)
         }   
-
         return NewBlog //Send to GraphQL the information 
     },
 
