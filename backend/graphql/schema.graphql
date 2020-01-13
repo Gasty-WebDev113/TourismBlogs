@@ -42,12 +42,16 @@ type Response{
     errors: String,
 }
 
-#Mutations Types
+type BlogCreateResponse{
+    success: Boolean,
+    errors: String,
+}
+
+#Mutations Inputs
 
 input BlogCreate{
     Content: String!,
     Title: String!,
-    Photo: String!,
 }
 
 input NewUser{
@@ -100,7 +104,7 @@ type Mutation{
     loginUser( email: String! password: String! ): Response
 
     "Crear Blog / Create Blog"
-    createBlog(input: BlogCreate!): Blogs
+    createBlog(input: BlogCreate! files: [Upload!]): BlogCreateResponse
 
     "Manejador de Like / Like Manager"
     addLike (_id: ID!): Blogs

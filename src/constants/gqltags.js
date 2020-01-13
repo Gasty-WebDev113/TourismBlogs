@@ -6,7 +6,7 @@ export const  GET_BLOGS = gql`
             getBlogs{
                 _id
                 Title
-                Photo
+                Photos
                 Likes
                 Bookmarks
                 Content
@@ -20,7 +20,7 @@ export const  GET_BOOKMARKS = gql`
             getBookmarks{
                 _id
                 Title
-                Photo
+                Photos
                 Likes
                 Bookmarks
                 Content
@@ -73,6 +73,14 @@ export const  GET_USER = gql`
             }
         `;
 
+export const CREATE_BLOG = gql`
+mutation createBlog($input: BlogCreate!, $files: [Upload!]) {
+    createBlog(input: $input, files: $files){
+            success
+      }
+    }
+`;
+
 export const EDIT_USER_MUTATION = gql`
         mutation editUser($input: EditUser!) {
             editUser(input: $input){
@@ -93,7 +101,7 @@ mutation ProfileImageUpload($file: Upload!) {
 
 export const REGISTER_MUTATION = gql`
 mutation createUser($input: NewUser!) {
-        createUser(input: $input){
+        createUser(input: $inputs){
             token
       }
     }

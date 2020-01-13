@@ -11,7 +11,7 @@ module.exports = {
             try {
                 DataBase = await MongoConection() //"The patience makes the sage"
                 blogs = DataBase.collection('Blogs').find().toArray()
-                
+               
                 for(let blog of Object.values(await blogs)){
                     blog.Liked = false;
                     blog.Bookmarks = false
@@ -20,6 +20,7 @@ module.exports = {
            } catch (error) {
                 console.error(error)
             }
+            console.log(await blogs)
             return blogs
             
         }else{

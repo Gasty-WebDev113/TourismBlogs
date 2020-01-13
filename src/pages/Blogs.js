@@ -9,7 +9,7 @@ export const Blogs = () => {
     const {loading, error, data} = useQuery(GET_BLOGS)
 
     if (loading) return <Loader/>;
-    if (error) return <NotFound />
+    //if (error) return <NotFound />
 
     return (
             <div style={{background: "whitesmoke"}}>
