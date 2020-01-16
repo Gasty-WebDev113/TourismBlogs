@@ -56,6 +56,7 @@ module.exports = {
         } catch (error) {
             console.error("Fallo en la operacion | Faild operation", error)
         } 
+        console.log("Success")
         return {
             success: true,
         } //Send to GraphQL the information 

@@ -5,7 +5,6 @@ const bcrypt = require('bcrypt')
 module.exports = {
 
     register: async({input}) => {
-    
         if( !input.Username ){
             throw new Error("El nombre de usuario es obligatorio")
         }

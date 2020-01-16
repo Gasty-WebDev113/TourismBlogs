@@ -101,7 +101,7 @@ mutation ProfileImageUpload($file: Upload!) {
 
 export const REGISTER_MUTATION = gql`
 mutation createUser($input: NewUser!) {
-        createUser(input: $inputs){
+        createUser(input: $input){
             token
       }
     }

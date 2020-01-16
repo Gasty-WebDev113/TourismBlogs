@@ -1,10 +1,11 @@
-import React,{useState, useEffect, useCallback} from 'react';
+import React,{useState, useEffect} from 'react';
 import { useMutation } from '@apollo/react-hooks'
 import { useDropzone } from 'react-dropzone';
 import {CREATE_BLOG} from '../constants/gqltags'
 import {FileviewContainer, FileList, FileInner, FilePreview } from '../constants/imagedropzone'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import Alert from 'react-bootstrap/Alert'
 
 export const useCreateBlog = () => {
         const useInputValue = initialValue =>{ //Manages the values of the form to send to the mutation
@@ -13,11 +14,11 @@ export const useCreateBlog = () => {
 
         return { value, onChange } //Returns the data and the event
         }
-
         const title = useInputValue('')
         const content = useInputValue('') 
 
-        const [createBlog] = useMutation(CREATE_BLOG)
+        const [createBlog, {loading}] = useMutation(CREATE_BLOG)
+        console.log(loading)
         const [files, setFiles] = useState([]);
         const {getRootProps, getInputProps} = useDropzone({
           accept: 'image/*',
@@ -45,7 +46,7 @@ export const useCreateBlog = () => {
         
         const CreateBlog = async() =>{
           let input = {Title: title.value, Content: content.value }
-          console.log(input)
+          console.log(loading)
           createBlog({variables: {input: input, files: files}})
         }
 
@@ -53,9 +54,9 @@ export const useCreateBlog = () => {
         <Form onSubmit={e => {e.preventDefault(); CreateBlog()}}>
             <h1>Create a blog</h1>
             <br />
-            <Form.Control size="lg" type="text" placeholder="Title" value={title.value} onChange={title.onChange} />
+            <Form.Control size="lg" type="text" placeholder="Title" value={title.value} onChange={title.onChange} disabled={loading} />
             <br />
-            <Form.Control as="textarea" rows="10" required value={content.value} onChange={content.onChange} />
+            <Form.Control as="textarea" rows="10" required value={content.value} onChange={content.onChange} disabled={loading}/>
             <br />
             <section className="container">
                 <div {...getRootProps({className: 'dropzone'})}>
@@ -66,9 +67,12 @@ export const useCreateBlog = () => {
                     {fileview}
                 </FileviewContainer>
             </section>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" disabled={loading}>
                 Submit
             </Button>
+            <Alert variant="success" show={loading}>
+              Blog Submitted
+            </Alert>
         </Form>
         );
       }

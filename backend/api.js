@@ -42,7 +42,7 @@ server.applyMiddleware({ //Apply the graphql server as a middleware
 app.get('/images/:id', async function (req, res) {
     let Database = await MongoConection()
     let gfs = Grid(Database, mongo)
-
+    
     let read = gfs.createReadStream({ //Render the image
         _id: req.params.id
     })

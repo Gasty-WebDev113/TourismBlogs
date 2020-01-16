@@ -12,11 +12,10 @@ export const BlogsListComponent = ({ _id, Title, Photos, Likes, Bookmarks, Conte
     const Like = useLikeAction(BlogId, Liked, Likes)
     const BookMarks = useBookmarksAction(BlogId, Bookmarks)
     const { error, data } = useQuery(GET_BLOGS);
-    console.log(Photos)
 
 return(
     <BlogPreveiw>
-        <PreviewImage src={Photos !== [] ? `http://localhost:4000/images/${Photos}`: null}></PreviewImage>
+        <PreviewImage src={Photos ? `http://localhost:4000/images/${Photos[0]}`: null}></PreviewImage>
         <BlogTitle to={`/blogs/${_id}`}>{Title}</BlogTitle>
         <PreviewDescription>
         {Content_sliced}
