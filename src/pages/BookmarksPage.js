@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import {BlogsList} from '../components/BlogsList'
 import {GET_BOOKMARKS} from '../constants/gqltags'
 import {Loader} from '../components/Loader'
@@ -11,10 +11,10 @@ export const BookmarksPage = () => {
     if (loading) return <Loader/>;
     if (error) return <NotFound />
     return (
-            <div style={{background: 'whitesmoke'}}>
+            <Fragment>
                 <h1 style={{paddingTop: '15vh'}}>Your Bookmarks</h1>
                 <BlogsList querydata={data.getBookmarks} />
-            </div>
+            </Fragment>
 )}
 
 

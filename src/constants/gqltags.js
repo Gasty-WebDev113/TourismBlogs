@@ -11,6 +11,7 @@ export const  GET_BLOGS = gql`
                 Bookmarks
                 Content
                 Liked
+                Author
                     }
             }
     `;
@@ -59,6 +60,7 @@ export const  GET_USER_INFO = gql`
 export const  GET_USER = gql`
             query getUser($Username: String!){
                 getUser(Username: $Username){
+                    _id
                     Username
                     Email
                     LikedBlog{

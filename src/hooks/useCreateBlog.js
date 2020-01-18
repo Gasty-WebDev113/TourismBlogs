@@ -2,7 +2,7 @@ import React,{useState, useEffect} from 'react';
 import { useMutation } from '@apollo/react-hooks'
 import { useDropzone } from 'react-dropzone';
 import {CREATE_BLOG} from '../constants/gqltags'
-import {FileviewContainer, FileList, FileInner, FilePreview } from '../constants/imagedropzone'
+import {Drop, DropText, FileviewContainer, FileList, FileInner, FilePreview } from '../constants/imagedropzone'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Alert from 'react-bootstrap/Alert'
@@ -51,17 +51,19 @@ export const useCreateBlog = () => {
         }
 
         return (
-        <Form onSubmit={e => {e.preventDefault(); CreateBlog()}}>
+        <Form onSubmit={e => {e.preventDefault(); CreateBlog()}} style={{width: '80%', textAlign: 'center', margin: '0 auto'}}>
             <h1>Create a blog</h1>
             <br />
-            <Form.Control size="lg" type="text" placeholder="Title" value={title.value} onChange={title.onChange} disabled={loading} />
+            <Form.Control size="lg" type="text" placeholder="Title" value={title.value} onChange={title.onChange} disabled={loading} required/>
             <br />
             <Form.Control as="textarea" rows="10" required value={content.value} onChange={content.onChange} disabled={loading}/>
             <br />
             <section className="container">
                 <div {...getRootProps({className: 'dropzone'})}>
                     <input {...getInputProps()} />
-                    <p>Drag 'n' drop the images to make your blog happier 😄</p>
+                    <Drop>
+                      <DropText role="image">Drag 'n' drop the images to make your blog happier 😄</DropText>
+                    </Drop>
                 </div>
                 <FileviewContainer>
                     {fileview}

@@ -1,5 +1,20 @@
 import styled from "styled-components";
 
+export const Drop = styled.div`
+    background-color: white;
+    height: 10vh;
+    outline: 2px dashed black;
+    outline-offset: -10px;
+    line-height: 10vh;
+    margin-bottom: 3vh;
+`
+
+export const DropText = styled.span`
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+`
+
 export const FileviewContainer = styled.aside`
     display: 'flex';
     flex-direction: 'row';

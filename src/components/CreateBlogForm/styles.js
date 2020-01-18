@@ -6,7 +6,8 @@ export const CreateBlogFormContainer = styled.div`
     height: 100%;
     padding-top: 5vw;
     display: inline-block;
-    @media (max-width: 768px){
+    
+    @media (min-width: 768px) and (max-width: 1024px){
         padding-top: 10vw;
     }
     @media (min-width: 320px) and (max-width: 767px){
