@@ -20,7 +20,6 @@ module.exports = {
            } catch (error) {
                 console.error(error)
             }
-            console.log(await blogs)
             return blogs
             
         }else{
@@ -74,15 +73,27 @@ module.exports = {
 
     getUserInfo: async (parent, args, context) =>{
         let DataBase = await MongoConection()
-        const userAuth = checkUserLogged(context.auth)
+        
+        if(context.auth === 'nothing'){
+            return null
+        }else{
+            const userAuth = checkUserLogged(context.auth)
+            const UserInfo = await DataBase.collection('Users').findOne({_id: ObjectID(userAuth)})
+            console.log(UserInfo)
+            return UserInfo
+        }
 
-        const UserInfo = await DataBase.collection('Users').findOne({_id: ObjectID(userAuth)})
-        return UserInfo
+        
     },    
 
-    getUser: async (parent, {Username}) =>{
+    getUser: async (parent, {Username, _id}) =>{
         let DataBase = await MongoConection()
-        const Info = await DataBase.collection('Users').findOne({'Username': `${Username}`})
-        return Info
+        if (Username !== undefined){
+            const Info = await DataBase.collection('Users').findOne({'Username': `${Username}`})
+            return Info
+        }else if(_id !== undefined){
+            const Info = await DataBase.collection('Users').findOne({_id: ObjectID(_id)})
+            return Info
+        }  
     },
 }

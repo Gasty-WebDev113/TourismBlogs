@@ -34,7 +34,7 @@ export const PreviewImage = styled.img`
     position: relative;
     height: 100%;
     width: 30%;
-    background: blue;
+    background: gray;
     float: left;
 `
 export const BlogTitle= styled(Link)`

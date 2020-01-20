@@ -65,15 +65,17 @@ export const BOOKMARKS_CHANGE = gql`
 export const  GET_USER_INFO = gql`
                 {
                 getUserInfo{
+                    _id
                     Username
                     ProfilePhoto
+                    Description
                     }
                 }
         `;
 
 export const  GET_USER = gql`
-            query getUser($Username: String!){
-                getUser(Username: $Username){
+            query getUser($Username: String, $_id: ID){
+                getUser(Username: $Username, _id: $_id){
                     _id
                     Username
                     Email

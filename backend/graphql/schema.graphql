@@ -85,7 +85,7 @@ type Query{
     getUserInfo:User
 
     "Trae la informacion un usuario"
-    getUser(Username: String!):User
+    getUser(Username: String, _id: ID):User
 }
 
 type Mutation{
