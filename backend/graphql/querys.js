@@ -43,6 +43,7 @@ module.exports = {
             }
          return blogs   
         }},
+
     getBookmarks: async (parent, args, context) => {
         let DataBase = await MongoConection()
         let Bookmarks = [] //This will contain the blogs information
@@ -56,21 +57,19 @@ module.exports = {
                 let BlogBookmarksverify = BookmarksList.includes(blog._id.toString())
                 if(BlogBookmarksverify) Bookmarks.push(blog) 
             }
-        
-
         return Bookmarks
     },
 
     getBlog: async (parent, {_id}, context) =>{
         let DataBase
-        let blog
+        let Blog
         try {
             DataBase = await MongoConection() //"The patience makes the sage"
-            blog = DataBase.collection('Blogs').findOne({_id: ObjectID(_id)})
+            Blog = DataBase.collection('Blogs').findOne({_id: ObjectID(_id)})
        } catch (error) {
             console.error(error)
         }
-        return blog
+        return Blog
     },
 
     getUserInfo: async (parent, args, context) =>{

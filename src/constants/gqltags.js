@@ -15,6 +15,20 @@ export const  GET_BLOGS = gql`
                     }
             }
     `;
+export const  GET_BLOG = gql`
+            query getBlog($_id: ID!){
+            getBlog(_id: $_id){
+                _id
+                Title
+                Photos
+                Likes
+                Bookmarks
+                Content
+                Liked
+                Author
+                    }
+            }
+            `;
 
 export const  GET_BOOKMARKS = gql`
             {
